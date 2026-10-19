@@ -216,6 +216,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .media--side > :first-child { grid-row: 1 / -1; }
 .media--hero4 { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: minmax(0, 1.5fr) minmax(0, 1fr); }
 .media--hero4 > :first-child { grid-column: 1 / -1; }
+.media--album { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.media--album > .fig-open { height: 100%; }
+.media--album > :first-child { grid-column: span 2; grid-row: span 2; }
 .media--vid2 { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: minmax(0, 1.2fr) minmax(0, 1fr); }
 .media--vid2 > :nth-child(-n+2) { grid-column: span 2; }
 .media--portrait { grid-column: 8 / -1; justify-self: center; height: 100%; width: auto; max-width: 100%; aspect-ratio: var(--mar); display: flex; }
@@ -398,10 +401,13 @@ dialog::backdrop { background: transparent; }
   .sheet-inner { display: flex; flex-direction: column; gap: 22px; overflow-y: auto; overscroll-behavior: contain;
     padding: calc(var(--top) + env(safe-area-inset-top, 0px) + 6px) var(--gut) calc(var(--bottom) + env(safe-area-inset-bottom, 0px) + 30px) max(16px, env(safe-area-inset-left, 0px)); }
   .sheet-text { order: 2; max-height: none; overflow: visible; padding-right: 0; align-self: stretch; }
-  .media, .media--portrait, .media--fit, .media--row, .media--tray, .media--trio, .media--five, .media--side, .media--hero4, .media--vid2 { order: 1; flex: none; height: auto; width: 100%; max-width: 100%; aspect-ratio: auto; align-self: stretch; }
+  .media, .media--portrait, .media--fit, .media--row, .media--tray, .media--trio, .media--five, .media--side, .media--hero4, .media--vid2, .media--album { order: 1; flex: none; height: auto; width: 100%; max-width: 100%; aspect-ratio: auto; align-self: stretch; }
   .fig-open { flex: none; aspect-ratio: var(--ar, 4 / 3); max-height: 62svh; }
   .media--fit .fig-open { max-height: 62svh; }
   .media--portrait { display: block; }
+  .media--album { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto; }
+  .media--album > .fig-open { aspect-ratio: 1; height: auto; }
+  .media--album > :first-child { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 4 / 3; }
   .media--trio, .media--five, .media--side, .media--hero4, .media--vid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto; }
   .media--vid2 > :nth-child(-n+2) { grid-column: 1 / -1; }
   .media--five > :first-child, .media--side > :first-child, .media--hero4 > :first-child { grid-column: 1 / -1; grid-row: auto; }
@@ -452,7 +458,7 @@ dialog::backdrop { background: transparent; }
 <header class="top">
   <a class="mark" href="#s00" data-go="0"><b>N. Krupkin</b><span>Cross Section</span></a>
   <div class="top-right">
-    <span class="count" id="count" aria-hidden="true"><b>00</b> / 18</span>
+    <span class="count" id="count" aria-hidden="true"><b>00</b> / 16</span>
     <button class="chip-btn" type="button" data-index aria-haspopup="dialog">
       <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 1h4v4H1zM7 1h4v4H7zM1 7h4v4H1zM7 7h4v4H7z" fill="none" stroke="currentColor"/></svg>Index
     </button>
@@ -988,29 +994,29 @@ dialog::backdrop { background: transparent; }
     </div>
   </section>
 
-  <!-- 13 · FIELD NOTES -->
-  <section class="sheet" id="s13" data-domain="field" data-title="Field Notes" data-loc="Southern Adirondacks, NY" data-date="Sep 5–6, 2026" data-scale="1 : 24 000" data-thumb="media/log-section-sm.webp" aria-roledescription="slide" aria-label="Sheet 13: Field notes">
+  <!-- 13 · OUTDOORS -->
+  <section class="sheet" id="s13" data-domain="field" data-title="Outdoors" data-loc="Adirondacks · Catskills · New Jersey" data-date="Every season" data-scale="1 : 24 000" data-thumb="media/fish-smallmouth-sm.webp" aria-roledescription="slide" aria-label="Sheet 13: Outdoors">
     <div class="sheet-inner">
       <div class="sheet-text">
         <p class="eyebrow rv">Part II · Outdoors</p>
-        <h2 class="h2 rv">Field notes</h2>
-        <p class="lede rv">A cut log is a cross section you can read: one ring for every year of growth. This one, in the southern Adirondacks, is rotting from the center, with a cluster of scaly Pholiota fruiting from the decay.</p>
+        <h2 class="h2 rv">On the water</h2>
+        <p class="lede rv">When I'm not building, I'm outside: fishing from a kayak or a boat, wading rivers close to home, and hiking the Adirondacks and Catskills. Fishing is a lot like engineering. You read the conditions, try something, see what happens, and adjust.</p>
         <dl class="facts rv">
-          <dt>Date</dt><dd>Sep 5, 2026 · 13:49</dd>
-          <dt>Elevation</dt><dd>613 m</dd>
-          <dt>Position</dt><dd>43.18° N, 74.48° W</dd>
+          <dt>Where</dt><dd>Adirondacks, Catskills, and rivers and ponds in New Jersey</dd>
+          <dt>Caught</dt><dd>Largemouth and smallmouth bass, chain pickerel, catfish</dd>
+          <dt>How</dt><dd>Kayak, boat, and from shore</dd>
         </dl>
-        <p class="note rv">Every photo in this part is labeled with the time, elevation, and position its camera recorded. Positions are rounded to about a kilometer.</p>
-        <div class="actions rv"><button class="btn" type="button" data-wu="13">Full write-up <span class="arr" aria-hidden="true">→</span></button></div>
       </div>
-      <div class="media media--portrait" style="--mar: 3 / 4; --ar: 3 / 4">
-        <figure class="fig">
-          <button class="fig-open" type="button" data-src="media/log-section.webp" data-cap="Cut log with scaly Pholiota fruiting from the rotted center." data-meta="Sep 5, 2026 · 13:49 · 613 m · 43.18° N, 74.48° W" aria-label="Open photo: cut log with fungi">
-            <img src="media/log-section.webp" width="1350" height="1800" loading="lazy" decoding="async" alt="The cut end of a decaying log showing growth rings, with a cluster of orange scaly mushrooms growing from the rotted center">
-            <span class="fig-coord">43.18° N · 74.48° W · 613 m</span>
-          </button>
-          <figcaption><span class="fig-no">FIG 13.1</span>Cut log, southern Adirondacks.</figcaption>
-        </figure>
+      <div class="media media--album">
+        <button class="fig-open" type="button" data-src="media/fish-smallmouth.webp" data-cap="Smallmouth bass at sunset from the boat." aria-label="Open photo: Smallmouth bass at sunset from the boat."><img src="media/fish-smallmouth-sm.webp" loading="lazy" decoding="async" alt="Nathan holding a smallmouth bass on a boat under an orange sunset sky"></button>
+        <button class="fig-open" type="button" data-src="media/canada-lake.webp" data-cap="Canada Lake at sunset, from the kayak." data-meta="Sep 5, 2026 · Adirondacks" aria-label="Open photo: Canada Lake at sunset, from the kayak."><img src="media/canada-lake-sm.webp" loading="lazy" decoding="async" alt="Sunset over a lake from the bow of a kayak with a rod and net"></button>
+        <button class="fig-open" type="button" data-src="media/fish-pickerel.webp" data-cap="Chain pickerel." aria-label="Open photo: Chain pickerel."><img src="media/fish-pickerel-sm.webp" loading="lazy" decoding="async" alt="Nathan holding a chain pickerel beside a pond on a sunny day"></button>
+        <button class="fig-open" type="button" data-src="media/fish-catfish.webp" data-cap="Catfish from a river." aria-label="Open photo: Catfish from a river."><img src="media/fish-catfish-sm.webp" loading="lazy" decoding="async" alt="Nathan holding a large catfish beside a stone-walled river"></button>
+        <button class="fig-open" type="button" data-src="media/fish-lm-a.webp" data-cap="Largemouth bass." aria-label="Open photo: Largemouth bass."><img src="media/fish-lm-a-sm.webp" loading="lazy" decoding="async" alt="Nathan holding a largemouth bass under green trees"></button>
+        <button class="fig-open" type="button" data-src="media/fish-lm-b.webp" data-cap="Largemouth bass in fall." aria-label="Open photo: Largemouth bass in fall."><img src="media/fish-lm-b-sm.webp" loading="lazy" decoding="async" alt="Nathan holding a largemouth bass in front of autumn leaves"></button>
+        <button class="fig-open" type="button" data-src="media/catskills-bass.webp" data-cap="A bass at sunset in the Catskills." data-meta="Jul 3, 2026 · Catskills" aria-label="Open photo: A bass at sunset in the Catskills."><img src="media/catskills-bass-sm.webp" loading="lazy" decoding="async" alt="A bass held up against an orange sunset over a lake"></button>
+        <button class="fig-open" type="button" data-src="media/fish-lm-c.webp" data-cap="Largemouth bass over clear water." aria-label="Open photo: Largemouth bass over clear water."><img src="media/fish-lm-c-sm.webp" loading="lazy" decoding="async" alt="A largemouth bass held up over a clear, shallow lake"></button>
+        <button class="fig-open" type="button" data-src="media/log-section.webp" data-cap="Cut log with scaly Pholiota, southern Adirondacks." data-meta="Sep 5, 2026 · Adirondacks" aria-label="Open photo: Cut log with scaly Pholiota, southern Adirondacks."><img src="media/log-section-sm.webp" loading="lazy" decoding="async" alt="The cut end of a decaying log with orange mushrooms growing from the center"></button>
       </div>
     </div>
   </section>
@@ -1054,59 +1060,8 @@ dialog::backdrop { background: transparent; }
     </div>
   </section>
 
-  <!-- 15 · CANADA LAKE -->
-  <section class="sheet" id="s15" data-domain="field" data-title="Canada Lake" data-loc="43.17° N 74.51° W · 471 m" data-date="Sep 5, 2026 · 19:20" data-scale="1 : 24 000" data-thumb="media/canada-lake-sm.webp" aria-roledescription="slide" aria-label="Sheet 15: Canada Lake">
-    <div class="sheet-inner">
-      <div class="sheet-text">
-        <p class="eyebrow rv">Field notes · Caroga, NY</p>
-        <h2 class="h2 rv">Canada Lake</h2>
-        <p class="lede rv">Last light from the kayak, with the rod rigged and the net strapped to the deck. Canada Lake sits at about 1,550 feet in the southern Adirondacks.</p>
-        <dl class="facts rv">
-          <dt>Date</dt><dd>Sep 5, 2026 · 19:20</dd>
-          <dt>Elevation</dt><dd>471 m</dd>
-          <dt>Position</dt><dd>43.17° N, 74.51° W</dd>
-        </dl>
-        <div class="actions rv"><button class="btn" type="button" data-wu="15">Full write-up <span class="arr" aria-hidden="true">→</span></button></div>
-      </div>
-      <div class="media media--portrait" style="--mar: 3 / 4; --ar: 3 / 4">
-        <figure class="fig">
-          <button class="fig-open" type="button" data-src="media/canada-lake.webp" data-cap="Canada Lake at sunset, from the kayak." data-meta="Sep 5, 2026 · 19:20 · 471 m · 43.17° N, 74.51° W" aria-label="Open photo: Canada Lake at sunset">
-            <img src="media/canada-lake.webp" width="1500" height="2000" loading="lazy" decoding="async" alt="Sunset over Canada Lake from the bow of a kayak, with a fishing rod and a landing net strapped to the deck">
-            <span class="fig-coord">43.17° N · 74.51° W · 471 m</span>
-          </button>
-          <figcaption><span class="fig-no">FIG 15.1</span>Canada Lake, 19:20.</figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- 16 · CATSKILLS -->
-  <section class="sheet" id="s16" data-domain="field" data-title="Catskills" data-loc="42.00° N 74.14° W · 181 m" data-date="Jul 3, 2026 · 20:39" data-scale="1 : 24 000" data-thumb="media/catskills-bass-sm.webp" aria-roledescription="slide" aria-label="Sheet 16: Catskills">
-    <div class="sheet-inner">
-      <div class="sheet-text">
-        <p class="eyebrow rv">Field notes · Catskills, NY</p>
-        <h2 class="h2 rv">Catskills</h2>
-        <p class="lede rv">A bass at sunset from the boat, the night before the Fourth of July.</p>
-        <dl class="facts rv">
-          <dt>Date</dt><dd>Jul 3, 2026 · 20:39</dd>
-          <dt>Elevation</dt><dd>181 m</dd>
-          <dt>Position</dt><dd>42.00° N, 74.14° W</dd>
-        </dl>
-      </div>
-      <div class="media media--portrait" style="--mar: 3 / 4; --ar: 3 / 4">
-        <figure class="fig">
-          <button class="fig-open" type="button" data-src="media/catskills-bass.webp" data-cap="A bass at sunset." data-meta="Jul 3, 2026 · 20:39 · 181 m · 42.00° N, 74.14° W" aria-label="Open photo: a bass at sunset">
-            <img src="media/catskills-bass.webp" width="1500" height="2000" loading="lazy" decoding="async" alt="A bass held up against an orange sunset over a lake, with a friend fishing in the boat behind">
-            <span class="fig-coord">42.00° N · 74.14° W · 181 m</span>
-          </button>
-          <figcaption><span class="fig-no">FIG 16.1</span>Bass at sunset, 20:39.</figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- 17 · FILM -->
-  <section class="sheet" id="s17" data-domain="cross" data-title="Film" data-loc="6 videos · 4 clips" data-date="2024–2026" data-scale="—" data-thumb="media/clip-longgoal-poster.webp" aria-roledescription="slide" aria-label="Sheet 17: Film">
+  <!-- 15 · FILM -->
+  <section class="sheet" id="s15" data-domain="cross" data-title="Film" data-loc="6 videos · 4 clips" data-date="2024–2026" data-scale="—" data-thumb="media/clip-longgoal-poster.webp" aria-roledescription="slide" aria-label="Sheet 15: Film">
     <div class="sheet-inner">
       <div class="sheet-text" style="grid-column: 1 / span 4">
         <p class="eyebrow rv">Film</p>
@@ -1128,8 +1083,8 @@ dialog::backdrop { background: transparent; }
     </div>
   </section>
 
-  <!-- 18 · ABOUT -->
-  <section class="sheet" id="s18" data-domain="cross" data-title="About" data-loc="Millburn, NJ" data-date="Class of 2027" data-scale="—" data-thumb="media/fungi-grisette-sm.webp" aria-roledescription="slide" aria-label="Sheet 18: About">
+  <!-- 16 · ABOUT -->
+  <section class="sheet" id="s16" data-domain="cross" data-title="About" data-loc="Millburn, NJ" data-date="Class of 2027" data-scale="—" data-thumb="media/fungi-grisette-sm.webp" aria-roledescription="slide" aria-label="Sheet 16: About">
     <div class="sheet-inner">
       <div class="sheet-text">
         <p class="eyebrow rv">About</p>
@@ -1183,6 +1138,10 @@ dialog::backdrop { background: transparent; }
         <button class="fig-open" type="button" data-src="media/arm-cylinder.webp" data-cap="Arm pneumatic pistons."><img src="media/arm-cylinder-sm.webp" alt="Arm pneumatic pistons." loading="lazy" decoding="async"><span class="cn">34</span></button>
         <button class="fig-open" type="button" data-src="media/arm-shoulder.webp" data-cap="Breakaway claw."><img src="media/arm-shoulder-sm.webp" alt="Breakaway claw." loading="lazy" decoding="async"><span class="cn">35</span></button>
         <button class="fig-open" type="button" data-src="media/arm-overhead.webp" data-cap="Prosthetic arm from above."><img src="media/arm-overhead-sm.webp" alt="Prosthetic arm from above." loading="lazy" decoding="async"><span class="cn">36</span></button>
+        <button class="fig-open" type="button" data-src="media/fish-smallmouth.webp" data-cap="Smallmouth bass."><img src="media/fish-smallmouth-sm.webp" alt="Smallmouth bass." loading="lazy" decoding="async"><span class="cn">37</span></button>
+        <button class="fig-open" type="button" data-src="media/fish-pickerel.webp" data-cap="Chain pickerel."><img src="media/fish-pickerel-sm.webp" alt="Chain pickerel." loading="lazy" decoding="async"><span class="cn">38</span></button>
+        <button class="fig-open" type="button" data-src="media/fish-catfish.webp" data-cap="Catfish."><img src="media/fish-catfish-sm.webp" alt="Catfish." loading="lazy" decoding="async"><span class="cn">39</span></button>
+        <button class="fig-open" type="button" data-src="media/fish-lm-b.webp" data-cap="Largemouth bass."><img src="media/fish-lm-b-sm.webp" alt="Largemouth bass." loading="lazy" decoding="async"><span class="cn">40</span></button>
       </div>
     </div>
   </section>
@@ -1191,7 +1150,7 @@ dialog::backdrop { background: transparent; }
 
 <footer class="tb" aria-label="Title block">
   <div class="tb-grid">
-    <div class="tb-cell tb-sheet"><span class="tb-k">Sheet</span><span class="tb-v" data-tb="sheet" aria-hidden="true">00 / 18</span></div>
+    <div class="tb-cell tb-sheet"><span class="tb-k">Sheet</span><span class="tb-v" data-tb="sheet" aria-hidden="true">00 / 16</span></div>
     <div class="tb-cell tb-title"><span class="tb-k">Title</span><span class="tb-v" data-tb="title" aria-hidden="true">Cross Section</span></div>
     <div class="tb-cell tb-domain"><span class="tb-k">Discipline</span><span class="tb-v" data-tb="domain" aria-hidden="true">Cross section</span></div>
     <div class="tb-cell tb-loc"><span class="tb-k">Location</span><span class="tb-v" data-tb="loc" aria-hidden="true">Millburn, NJ</span></div>
@@ -1229,7 +1188,7 @@ dialog::backdrop { background: transparent; }
 <!-- index -->
 <dialog class="ix" id="ix" aria-labelledby="ix-h">
   <div class="ix-wrap">
-    <div class="ix-head"><h2 id="ix-h">Index · 19 sheets</h2><button class="x-btn" type="button" data-close aria-label="Close index"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1 1 13" stroke="currentColor" stroke-width="1.4"/></svg></button></div>
+    <div class="ix-head"><h2 id="ix-h">Index · 17 sheets</h2><button class="x-btn" type="button" data-close aria-label="Close index"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1 1 13" stroke="currentColor" stroke-width="1.4"/></svg></button></div>
     <div class="ix-grid" id="ix-grid"></div>
   </div>
 </dialog>
@@ -1396,13 +1355,6 @@ dialog::backdrop { background: transparent; }
   <p>The joints, brackets, and socket are 3D printed on my own printer, with off-the-shelf pneumatic cylinders, valves, and fittings. This was a passion project.</p>
 </template>
 
-<template id="wu-13" data-title="Field notes">
-  <h3>The log</h3>
-  <p>A cut log is a cross section you can read: each ring is a year of growth. This one, in the southern Adirondacks, is decaying from the center outward. The orange cluster is a scaly Pholiota, a wood-decay fungus fruiting from the softened heartwood, and the pale tiers lower down are a second fungus working on the same log.</p>
-  <h3>About these photos</h3>
-  <p>Each photo in the outdoors section is labeled with the date, time, elevation, and position its camera recorded. Positions are rounded to two decimal places, which is about a kilometer.</p>
-</template>
-
 <template id="wu-14" data-title="Specimens">
   <p>Found on September 5 and 6, 2026, between 483 and 612 meters in the southern Adirondacks. Identifications are by eye from photos. <strong>cf.</strong> means "compare with" and marks a tentative ID; <strong>sp.</strong> means the genus is known and the species is not.</p>
   <h3>No. 01 · Old Man of the Woods</h3>
@@ -1412,11 +1364,7 @@ dialog::backdrop { background: transparent; }
   <h3>No. 03 · Tawny grisette</h3>
   <p><strong>cf. Amanita fulva.</strong> A slender amanita with an orange-brown cap and a grooved margin, growing beside a spruce seedling.</p>
   <h3>No. 04 · Scaly Pholiota</h3>
-  <p><strong>Pholiota sp.</strong> Clustered caps covered in upturned scales, on the same decaying log as sheet 13.</p>
-</template>
-
-<template id="wu-15" data-title="Canada Lake">
-  <p>Canada Lake is in the town of Caroga, in Fulton County, in the southern Adirondacks, at about 1,550 feet. This was taken from the kayak at 7:20 PM on September 5, 2026, with the rod rigged and the net strapped to the deck.</p>
+  <p><strong>Pholiota sp.</strong> Clustered caps covered in upturned scales, on the same decaying log shown on sheet 13.</p>
 </template>
 
 <!-- ===================== script ===================== -->
