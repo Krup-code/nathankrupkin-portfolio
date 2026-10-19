@@ -22,6 +22,11 @@
    wipes from one sheet to the next. The background is a live field that reads as a drafting grid
    on engineering sheets and as topographic contours on outdoor sheets. */
 @property --accent { syntax: "<color>"; inherits: true; initial-value: #d6d0c3; }
+@property --ground { syntax: "<color>"; inherits: true; initial-value: #0c1013; }
+@property --ground-2 { syntax: "<color>"; inherits: true; initial-value: #12181c; }
+@property --ground-3 { syntax: "<color>"; inherits: true; initial-value: #1a2227; }
+@property --ink { syntax: "<color>"; inherits: true; initial-value: #ebe7df; }
+@property --ink-2 { syntax: "<color>"; inherits: true; initial-value: #a9afb2; }
 :root {
   color-scheme: dark;
   --ground: #0c1013;
@@ -38,7 +43,8 @@
   --field-dim: rgba(225, 170, 95, .5);
   --cross: #d6d0c3;
   --cross-dim: rgba(214, 208, 195, .45);
-  --veil: rgba(12, 16, 19, .92);
+  --veil: color-mix(in srgb, var(--ground) 92%, transparent);
+  --shade: 12, 16, 19;
   --f-display: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --f-text: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --f-mono: "Martian Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
@@ -56,10 +62,27 @@ body {
   font-family: var(--f-text); font-size: 15px; line-height: 1.55;
   -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
   --accent: var(--cross);
-  transition: --accent .9s cubic-bezier(.6, 0, .2, 1);
+  transition: --accent 1.2s cubic-bezier(.45, 0, .2, 1), --ground 1.6s cubic-bezier(.45, 0, .2, 1), --ground-2 1.6s cubic-bezier(.45, 0, .2, 1), --ground-3 1.6s cubic-bezier(.45, 0, .2, 1), --ink 1.6s, --ink-2 1.6s;
 }
-body[data-domain="eng"] { --accent: var(--eng); }
-body[data-domain="field"] { --accent: var(--field); }
+body[data-domain="eng"] {
+  --accent: var(--eng);
+  --ground: #1a1d21; --ground-2: #22262b; --ground-3: #2a2f35;
+  --shade: 26, 29, 33;
+}
+body[data-domain="field"] {
+  --accent: var(--field);
+  --ground: #0e2a1b; --ground-2: #143523; --ground-3: #1b412c;
+  --ink: #f1ead8; --ink-2: #bdb49a; --ink-3: #868069;
+  --rule: rgba(241, 234, 216, .14); --rule-2: rgba(241, 234, 216, .3);
+  --shade: 14, 42, 27;
+}
+/* chapter card shown when crossing between Part I and Part II */
+.chapter { position: fixed; inset: 0; z-index: 18; display: grid; place-content: center; gap: 14px; text-align: center; pointer-events: none; opacity: 0; transition: opacity .5s ease; }
+.chapter.on { opacity: 1; }
+.chapter p { margin: 0; font: 500 .72rem/1 var(--f-mono); letter-spacing: .3em; text-transform: uppercase; color: var(--accent); transform: translateY(8px); transition: transform .9s var(--ease); }
+.chapter h2 { margin: 0; font-family: var(--f-display); font-stretch: 125%; font-weight: 700; font-size: clamp(3rem, 12vw, 11rem); line-height: .85; letter-spacing: -.03em; text-transform: uppercase; color: var(--ink); transform: translateY(14px) scale(.98); transition: transform 1.1s var(--ease); }
+.chapter.on p, .chapter.on h2 { transform: none; }
+.chapter::before { content: ""; position: absolute; inset: 0; z-index: -1; background: color-mix(in srgb, var(--ground) 78%, transparent); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
 body[data-domain="cross"] { --accent: var(--cross); }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; margin: 0; cursor: pointer; }
 a { color: inherit; }
@@ -70,7 +93,7 @@ img, video { display: block; max-width: 100%; }
 /* ---------- background field ---------- */
 .terrain { position: fixed; inset: 0; z-index: 0; width: 100%; height: 100%; display: block; }
 .veil { position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background: radial-gradient(130% 95% at 28% 50%, rgba(12, 16, 19, 0) 35%, rgba(12, 16, 19, .78) 100%); }
+  background: radial-gradient(130% 95% at 28% 50%, color-mix(in srgb, var(--ground) 0%, transparent) 35%, color-mix(in srgb, var(--ground) 78%, transparent) 100%); }
 
 /* ---------- chrome ---------- */
 .top {
@@ -109,7 +132,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   padding-bottom: env(safe-area-inset-bottom, 0px);
   padding-left: max(28px, env(safe-area-inset-left, 0px));
   padding-right: max(20px, env(safe-area-inset-right, 0px));
-  background: linear-gradient(to top, rgba(12, 16, 19, .96), rgba(12, 16, 19, .82));
+  background: linear-gradient(to top, color-mix(in srgb, var(--ground) 96%, transparent), color-mix(in srgb, var(--ground) 82%, transparent));
   -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
   border-top: 1px solid var(--rule);
 }
@@ -204,9 +227,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .fig-open::after { right: 10px; bottom: 10px; border-width: 0 1px 1px 0; }
 .fig-open:hover::before { top: 6px; left: 6px; }
 .fig-open:hover::after { right: 6px; bottom: 6px; }
-.fig-badge { position: absolute; z-index: 2; left: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 7px; padding: 6px 9px; background: rgba(12, 16, 19, .7); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); font: 500 .58rem/1 var(--f-mono); letter-spacing: .1em; color: var(--ink); }
+.fig-badge { position: absolute; z-index: 2; left: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 7px; padding: 6px 9px; background: color-mix(in srgb, var(--ground) 70%, transparent); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); font: 500 .58rem/1 var(--f-mono); letter-spacing: .1em; color: var(--ink); }
 .fig-badge svg { width: 9px; height: 9px; }
-.fig-coord { position: absolute; z-index: 2; right: 12px; top: 12px; padding: 5px 8px; background: rgba(12, 16, 19, .62); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); font: 500 .56rem/1.3 var(--f-mono); letter-spacing: .06em; color: var(--ink); }
+.fig-coord { position: absolute; z-index: 2; right: 12px; top: 12px; padding: 5px 8px; background: color-mix(in srgb, var(--ground) 62%, transparent); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); font: 500 .56rem/1.3 var(--f-mono); letter-spacing: .06em; color: var(--ink); }
 .fig figcaption { display: flex; gap: 12px; align-items: baseline; font: 400 .62rem/1.5 var(--f-mono); letter-spacing: .02em; color: var(--ink-2); }
 .fig-no { flex: none; color: var(--accent); letter-spacing: .06em; }
 
@@ -286,7 +309,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .xsec-eng { left: 0; width: var(--xs-w); object-position: 70% 44%; }
 .xsec-field { left: calc(100% - var(--xs-w)); width: var(--xs-w); object-position: 50% 60%; }
 .xsec-scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: linear-gradient(180deg, rgba(12, 16, 19, .78) 0%, rgba(12, 16, 19, 0) 20%, rgba(12, 16, 19, 0) 36%, rgba(12, 16, 19, .7) 66%, rgba(12, 16, 19, .97) 100%); }
+  background: linear-gradient(180deg, color-mix(in srgb, var(--ground) 78%, transparent) 0%, color-mix(in srgb, var(--ground) 0%, transparent) 20%, color-mix(in srgb, var(--ground) 0%, transparent) 36%, color-mix(in srgb, var(--ground) 70%, transparent) 66%, color-mix(in srgb, var(--ground) 97%, transparent) 100%); }
 .xsec-svg { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; pointer-events: none; color: var(--ink); overflow: visible; }
 .xsec-svg text { font-family: var(--f-mono); font-size: 13px; font-weight: 600; fill: currentColor; }
 .xsec-tag { position: absolute; z-index: 3; margin: 0; top: calc(var(--top) + env(safe-area-inset-top, 0px) + 14px); display: grid; gap: 4px; font: 500 .62rem/1.3 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); text-shadow: 0 1px 8px rgba(0, 0, 0, .6); }
@@ -296,8 +319,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .xsec-tag--eng::before, .xsec-tag--field::before { content: ""; display: block; width: 22px; height: 2px; margin-bottom: 6px; }
 .xsec-tag--eng::before { background: var(--eng); }
 .xsec-tag--field::before { background: var(--field); justify-self: end; }
-.xsec-handle { position: absolute; z-index: 4; left: 50%; top: 50%; width: 48px; height: 48px; margin: -24px 0 0 -24px; border-radius: 50%; border: 1px solid rgba(235, 231, 223, .85); background: rgba(12, 16, 19, .5); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); display: grid; place-items: center; cursor: ew-resize; touch-action: none; transition: transform .25s var(--ease), background-color .25s; }
-.xsec-handle:hover, .xsec.dragging .xsec-handle { transform: scale(1.08); background: rgba(12, 16, 19, .75); }
+.xsec-handle { position: absolute; z-index: 4; left: 50%; top: 50%; width: 48px; height: 48px; margin: -24px 0 0 -24px; border-radius: 50%; border: 1px solid rgba(235, 231, 223, .85); background: color-mix(in srgb, var(--ground) 50%, transparent); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); display: grid; place-items: center; cursor: ew-resize; touch-action: none; transition: transform .25s var(--ease), background-color .25s; }
+.xsec-handle:hover, .xsec.dragging .xsec-handle { transform: scale(1.08); background: color-mix(in srgb, var(--ground) 75%, transparent); }
 .xsec-handle svg { width: 20px; height: 20px; }
 .cover-copy {
   position: absolute; z-index: 3;
@@ -354,7 +377,7 @@ dialog::backdrop { background: transparent; }
 .lb-cap b { color: var(--ink); font-weight: 500; }
 .lb-num { color: var(--accent); }
 .lb .x-btn { position: absolute; z-index: 2; top: calc(14px + env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); }
-.lb-step { position: absolute; z-index: 2; top: 50%; margin-top: -22px; width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid var(--rule-2); background: rgba(12, 16, 19, .6); transition: border-color .25s, color .25s; }
+.lb-step { position: absolute; z-index: 2; top: 50%; margin-top: -22px; width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid var(--rule-2); background: color-mix(in srgb, var(--ground) 60%, transparent); transition: border-color .25s, color .25s; }
 .lb-step:hover { border-color: var(--accent); color: var(--accent); }
 .lb-step svg { width: 16px; height: 16px; }
 .lb-prev { left: max(16px, env(safe-area-inset-left, 0px)); }
@@ -484,6 +507,8 @@ dialog::backdrop { background: transparent; }
   <g class="c-arr c-arr-b"><line stroke="currentColor" stroke-width="1.5"/><path fill="currentColor"/><text class="cut-letter" text-anchor="middle"></text></g>
   <text class="c-label" text-anchor="middle"></text>
 </svg>
+
+<div class="chapter" id="chapter" aria-hidden="true"><p id="chapter-k"></p><h2 id="chapter-t"></h2></div>
 
 <main class="stage" id="stage">
 
@@ -1751,6 +1776,13 @@ dialog::backdrop { background: transparent; }
     const dir = to > cur ? 1 : -1;
     const from = sheets[cur], next = sheets[to];
     const fromDomain = from.dataset.domain, toDomain = next.dataset.domain;
+    if (!reduced && !opts.instant && toDomain !== fromDomain && (toDomain === "field" || (toDomain === "eng" && fromDomain === "field"))) {
+      const ch = document.getElementById("chapter");
+      document.getElementById("chapter-k").textContent = toDomain === "field" ? "Part II" : "Part I";
+      document.getElementById("chapter-t").textContent = toDomain === "field" ? "Outdoors" : "Engineering";
+      clearTimeout(ch._t); ch.classList.add("on");
+      ch._t = setTimeout(() => ch.classList.remove("on"), 1500);
+    }
     busy = true; stage.classList.add("busy");
     preloadSheet(next);
     chrome(to);
