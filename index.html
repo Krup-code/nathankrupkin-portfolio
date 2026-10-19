@@ -456,7 +456,7 @@ dialog::backdrop { background: transparent; }
 <div class="veil" aria-hidden="true"></div>
 
 <header class="top">
-  <a class="mark" href="#s00" data-go="0"><b>N. Krupkin</b><span>Cross Section</span></a>
+  <a class="mark" href="#s00" data-go="0"><b>N. Krupkin</b><span>Portfolio</span></a>
   <div class="top-right">
     <span class="count" id="count" aria-hidden="true"><b>00</b> / 16</span>
     <button class="chip-btn" type="button" data-index aria-haspopup="dialog">
@@ -485,7 +485,7 @@ dialog::backdrop { background: transparent; }
 <main class="stage" id="stage">
 
   <!-- 00 · COVER -->
-  <section class="sheet sheet--cover is-active" id="s00" data-domain="cross" data-title="Cross Section" data-loc="Millburn, NJ" data-date="2023–2027" data-scale="—" data-thumb="media/pushback-states-sm.webp" aria-roledescription="slide" aria-label="Sheet 00: Cross Section">
+  <section class="sheet sheet--cover is-active" id="s00" data-domain="cross" data-title="Nathan Krupkin" data-loc="Millburn, NJ" data-date="2023–2027" data-scale="—" data-thumb="media/pushback-states-sm.webp" aria-roledescription="slide" aria-label="Sheet 00: Nathan Krupkin">
     <div class="sheet-inner">
       <div class="xsec" id="xsec">
         <img class="xsec-img xsec-eng" src="media/pushback-states.webp" width="1575" height="1196" fetchpriority="high" alt="7405R's Over Under robot seen from above on a New Jersey competition field, with its roller intake, pneumatic lines, and blue 7405R team plates">
@@ -514,10 +514,9 @@ dialog::backdrop { background: transparent; }
         <div class="cover-left">
           <p class="eyebrow rv">Portfolio · Class of 2027</p>
           <h1 class="cover-name rv">Nathan<br>Krupkin</h1>
-          <p class="cover-sub rv">Cross Section</p>
         </div>
         <div class="cover-right">
-          <p class="cover-lede rv">I build robots and machines, and I spend as much time outdoors as I can. This portfolio is a cross section through both. Drag the section line to cut between them.</p>
+          <p class="cover-lede rv">I build robots and machines, and I spend as much time outdoors as I can. This portfolio brings both together. Drag the line to move between them.</p>
           <p class="cover-role rv">VEX team 7405R, four seasons: design &amp; build · driver · notebook &amp; strategy</p>
           <div class="actions rv">
             <button class="btn btn-solid" type="button" data-go="1">Begin <span class="arr" aria-hidden="true">→</span></button>
@@ -1151,8 +1150,8 @@ dialog::backdrop { background: transparent; }
 <footer class="tb" aria-label="Title block">
   <div class="tb-grid">
     <div class="tb-cell tb-sheet"><span class="tb-k">Sheet</span><span class="tb-v" data-tb="sheet" aria-hidden="true">00 / 16</span></div>
-    <div class="tb-cell tb-title"><span class="tb-k">Title</span><span class="tb-v" data-tb="title" aria-hidden="true">Cross Section</span></div>
-    <div class="tb-cell tb-domain"><span class="tb-k">Discipline</span><span class="tb-v" data-tb="domain" aria-hidden="true">Cross section</span></div>
+    <div class="tb-cell tb-title"><span class="tb-k">Title</span><span class="tb-v" data-tb="title" aria-hidden="true">Nathan Krupkin</span></div>
+    <div class="tb-cell tb-domain"><span class="tb-k">Discipline</span><span class="tb-v" data-tb="domain" aria-hidden="true">Overview</span></div>
     <div class="tb-cell tb-loc"><span class="tb-k">Location</span><span class="tb-v" data-tb="loc" aria-hidden="true">Millburn, NJ</span></div>
     <div class="tb-cell tb-date"><span class="tb-k">Date</span><span class="tb-v" data-tb="date" aria-hidden="true">2023–2027</span></div>
     <div class="tb-cell tb-scale"><span class="tb-k">Scale</span><span class="tb-v" data-tb="scale" aria-hidden="true">—</span></div>
@@ -1376,7 +1375,7 @@ dialog::backdrop { background: transparent; }
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const ANGLE_DEG = 8, TAN = Math.tan(ANGLE_DEG * Math.PI / 180);
   const LETTERS = "ABCDEFGHJKLMNPRSTUVWXYZ"; // drafting convention skips I, O, Q
-  const DOMAIN = { eng: "Engineering", field: "Field", cross: "Cross section" };
+  const DOMAIN = { eng: "Engineering", field: "Field", cross: "Overview" };
   const sheets = $$(".sheet");
   const N = sheets.length;
   const LAST = N - 1;
