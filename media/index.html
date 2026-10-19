@@ -1,0 +1,2042 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Nathan Krupkin Portfolio">
+<meta property="og:description" content="Engineering and outdoors portfolio: VEX team 7405R, a hand-welded go-kart, a prosthetic arm, and field notes from the Adirondacks.">
+<meta property="og:image" content="media/pushback-states.webp">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230c1013'/%3E%3Cpath d='M6 26 26 6' stroke='%23d6d0c3' stroke-width='3' stroke-dasharray='8 3 2 3'/%3E%3C/svg%3E">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Nathan Krupkin Portfolio</title>
+<meta name="description" content="Engineering and outdoors portfolio of Nathan Krupkin: four seasons on VEX robotics team 7405R, a hand-welded go-kart, and field notes from the Adirondacks and Catskills.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@75..112.5,300..600&display=swap">
+<style>
+/* Layout: a drawing set. Each slide is a numbered sheet with a title block; a cutting-plane line
+   wipes from one sheet to the next. The background is a live field that reads as a drafting grid
+   on engineering sheets and as topographic contours on outdoor sheets. */
+@property --accent { syntax: "<color>"; inherits: true; initial-value: #d6d0c3; }
+:root {
+  color-scheme: dark;
+  --ground: #0c1013;
+  --ground-2: #12181c;
+  --ground-3: #1a2227;
+  --ink: #ebe7df;
+  --ink-2: #a9afb2;
+  --ink-3: #737c80;
+  --rule: rgba(235, 231, 223, .11);
+  --rule-2: rgba(235, 231, 223, .24);
+  --eng: #8fb5ff;
+  --eng-dim: rgba(143, 181, 255, .5);
+  --field: #e1aa5f;
+  --field-dim: rgba(225, 170, 95, .5);
+  --cross: #d6d0c3;
+  --cross-dim: rgba(214, 208, 195, .45);
+  --veil: rgba(12, 16, 19, .92);
+  --f-display: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --f-text: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --f-mono: "Martian Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --top: 64px;
+  --bottom: 58px;
+  --rail: 84px;
+  --gut: max(32px, env(safe-area-inset-right, 0px));
+  --ease: cubic-bezier(.2, .7, .1, 1);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0; overflow: hidden;
+  background: var(--ground); color: var(--ink);
+  font-family: var(--f-text); font-size: 15px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  --accent: var(--cross);
+  transition: --accent .9s cubic-bezier(.6, 0, .2, 1);
+}
+body[data-domain="eng"] { --accent: var(--eng); }
+body[data-domain="field"] { --accent: var(--field); }
+body[data-domain="cross"] { --accent: var(--cross); }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; margin: 0; cursor: pointer; }
+a { color: inherit; }
+img, video { display: block; max-width: 100%; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; margin: -1px; }
+
+/* ---------- background field ---------- */
+.terrain { position: fixed; inset: 0; z-index: 0; width: 100%; height: 100%; display: block; }
+.veil { position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(130% 95% at 28% 50%, rgba(12, 16, 19, 0) 35%, rgba(12, 16, 19, .78) 100%); }
+
+/* ---------- chrome ---------- */
+.top {
+  position: fixed; z-index: 20; top: 0; left: 0; right: 0;
+  height: calc(var(--top) + env(safe-area-inset-top, 0px));
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-left: max(28px, env(safe-area-inset-left, 0px));
+  padding-right: max(28px, env(safe-area-inset-right, 0px));
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  pointer-events: none;
+}
+.top > * { pointer-events: auto; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 25; background: var(--ground); }
+.mark { display: flex; align-items: baseline; gap: 14px; text-decoration: none; font: 500 .7rem/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; }
+.mark b { font-weight: 600; color: var(--ink); }
+.mark span { color: var(--ink-3); }
+.top-right { display: flex; align-items: center; gap: 18px; }
+.count { font: 400 .7rem/1 var(--f-mono); letter-spacing: .08em; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.count b { color: var(--accent); font-weight: 500; }
+.chip-btn { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px; border: 1px solid var(--rule-2); font: 500 .62rem/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); transition: border-color .25s, color .25s; }
+.chip-btn:hover { border-color: var(--accent); color: var(--accent); }
+.chip-btn svg { width: 12px; height: 12px; }
+
+.rail { position: fixed; z-index: 20; top: 50%; left: max(22px, env(safe-area-inset-left, 0px)); transform: translateY(-50%); }
+.rail ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.rail button { display: flex; align-items: center; gap: 10px; height: 20px; padding: 0 2px; }
+.rail .tick { display: block; width: 12px; height: 1px; background: var(--cross-dim); transition: width .45s var(--ease), background .45s; }
+.rail [data-domain="eng"] .tick { background: var(--eng-dim); }
+.rail [data-domain="field"] .tick { background: var(--field-dim); }
+.rail [aria-current="true"] .tick { width: 30px; height: 2px; background: var(--accent); }
+.rail .rl { font: 500 .6rem/1 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink); background: var(--ground-2); border: 1px solid var(--rule); padding: 5px 7px; white-space: nowrap; opacity: 0; transform: translateX(-6px); transition: opacity .2s, transform .2s; pointer-events: none; }
+.rail button:hover .rl, .rail button:focus-visible .rl { opacity: 1; transform: none; }
+
+.tb {
+  position: fixed; z-index: 20; left: 0; right: 0; bottom: 0;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: max(28px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+  background: linear-gradient(to top, rgba(12, 16, 19, .96), rgba(12, 16, 19, .82));
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border-top: 1px solid var(--rule);
+}
+.tb-grid { display: grid; height: var(--bottom); grid-template-columns: 96px minmax(0, 2.1fr) 128px minmax(0, 1.7fr) minmax(0, 1.25fr) 104px auto; }
+.tb-cell { display: flex; flex-direction: column; justify-content: center; gap: 4px; min-width: 0; padding: 0 14px; border-left: 1px solid var(--rule); }
+.tb-cell:first-child { border-left: 0; padding-left: 0; }
+.tb-k { font: 500 .52rem/1 var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
+.tb-v { font: 400 .68rem/1.25 var(--f-mono); letter-spacing: .03em; color: var(--ink); overflow-wrap: anywhere; }
+.tb-sheet .tb-v { color: var(--accent); }
+.tb-nav { flex-direction: row; align-items: center; gap: 6px; padding-right: 0; }
+.nav-btn { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid var(--rule-2); transition: border-color .25s, color .25s, opacity .25s; }
+.nav-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+.nav-btn:disabled { opacity: .3; cursor: default; }
+.nav-btn svg { width: 16px; height: 16px; }
+
+.cut { position: fixed; inset: 0; z-index: 15; pointer-events: none; opacity: 0; color: var(--accent); overflow: visible; }
+.cut text { font-family: var(--f-mono); font-size: 10px; letter-spacing: .16em; fill: currentColor; }
+.cut .cut-letter { font-size: 13px; font-weight: 600; letter-spacing: 0; }
+
+/* ---------- sheets ---------- */
+.stage { position: fixed; inset: 0; z-index: 1; }
+.stage.busy { pointer-events: none; }
+.sheet { position: absolute; inset: 0; display: none; }
+.sheet.is-active, .sheet.is-entering, .sheet.is-leaving { display: block; }
+.sheet.is-entering { z-index: 3; }
+.sheet.is-leaving { z-index: 2; }
+.sheet-inner {
+  position: absolute; inset: 0;
+  padding: calc(var(--top) + env(safe-area-inset-top, 0px) + 18px) var(--gut) calc(var(--bottom) + env(safe-area-inset-bottom, 0px) + 22px) calc(var(--rail) + env(safe-area-inset-left, 0px));
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: minmax(0, 1fr);
+  column-gap: clamp(16px, 2vw, 32px);
+}
+.sheet-text {
+  grid-column: 1 / span 5; align-self: center; min-width: 0; max-height: 100%;
+  display: flex; flex-direction: column; gap: 18px;
+  overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--rule-2) transparent; padding-right: 6px;
+}
+.lay-wide .sheet-text { grid-column: 1 / span 5; }
+.media { grid-column: 7 / -1; min-width: 0; min-height: 0; height: 100%; display: grid; gap: 14px; }
+.lay-wide .media { grid-column: 7 / -1; }
+
+.eyebrow { margin: 0; display: flex; align-items: center; gap: 10px; font: 500 .64rem/1.4 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.eyebrow::before { content: ""; flex: none; width: 22px; height: 1px; background: currentColor; }
+.h2 { margin: 0; font-family: var(--f-display); font-stretch: 112%; font-weight: 600; font-size: clamp(2.1rem, 3.9vw, 4rem); line-height: .98; letter-spacing: -.015em; text-wrap: balance; }
+.lede { margin: 0; max-width: 46ch; font-size: clamp(.97rem, 1.02vw, 1.08rem); line-height: 1.62; color: var(--ink-2); }
+.lede strong { color: var(--ink); font-weight: 500; }
+.note { margin: 0; max-width: 46ch; font: 400 .64rem/1.6 var(--f-mono); letter-spacing: .02em; color: var(--ink-3); }
+
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--rule); }
+.stat { padding: 14px 14px 2px 0; border-right: 1px solid var(--rule); min-width: 0; }
+.stat + .stat { padding-left: 14px; }
+.stat:last-child { border-right: 0; }
+.stat-n { font-family: var(--f-display); font-stretch: 112%; font-weight: 600; font-size: clamp(1.8rem, 2.5vw, 2.5rem); line-height: 1; font-variant-numeric: tabular-nums; }
+.stat-k { margin-top: 8px; font: 400 .6rem/1.5 var(--f-mono); letter-spacing: .02em; color: var(--ink-2); }
+
+.ladder { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--rule); }
+.ladder button { display: flex; flex-direction: column; gap: 5px; min-width: 0; padding: 10px 12px; text-align: left; border-right: 1px solid var(--rule); transition: background .25s; }
+.ladder button:last-child { border-right: 0; }
+.ladder button:hover { background: rgba(235, 231, 223, .04); }
+.ladder .y { font: 500 .56rem/1.2 var(--f-mono); letter-spacing: .06em; color: var(--ink-3); }
+.ladder .y.now { color: var(--accent); }
+.ladder .g { font-weight: 600; font-size: .9rem; line-height: 1.2; }
+
+.facts { margin: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); border-top: 1px solid var(--rule); }
+.facts dt, .facts dd { margin: 0; padding: 9px 0; border-bottom: 1px solid var(--rule); }
+.facts dt { padding-right: 20px; font: 500 .58rem/1.75 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.facts dd { font-size: .9rem; line-height: 1.45; color: var(--ink); }
+.facts dd strong { font-weight: 600; }
+
+.results { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.results li { display: grid; grid-template-columns: 76px minmax(0, 1fr); column-gap: 14px; padding: 8px 0; border-bottom: 1px solid var(--rule); }
+.results .d { grid-row: span 2; padding-top: 3px; font: 500 .58rem/1.5 var(--f-mono); letter-spacing: .05em; text-transform: uppercase; color: var(--ink-3); }
+.results .r { font-size: .9rem; font-weight: 500; line-height: 1.35; color: var(--ink); }
+.results .e { font-size: .8rem; line-height: 1.4; color: var(--ink-2); }
+.results li.hl .r { color: var(--accent); }
+
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn { display: inline-flex; align-items: center; gap: 10px; height: 42px; padding: 0 16px; border: 1px solid var(--rule-2); font: 500 .64rem/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); text-decoration: none; transition: border-color .25s, background-color .25s, color .25s; }
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-solid { background: var(--accent); border-color: var(--accent); color: var(--ground); }
+.btn-solid:hover { background: transparent; color: var(--accent); }
+.btn .arr { display: inline-block; transition: transform .25s var(--ease); }
+.btn:hover .arr { transform: translateX(3px); }
+
+/* figures */
+.fig { margin: 0; min-width: 0; min-height: 0; display: flex; flex-direction: column; gap: 9px; }
+.fig-open { position: relative; display: block; width: 100%; flex: 1 1 auto; min-height: 0; overflow: hidden; background: var(--ground-2); cursor: zoom-in; }
+.fig-open img, .fig-open video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.3s var(--ease); }
+.fig-open:hover img, .fig-open:hover video { transform: scale(1.025); }
+.fig-open::before, .fig-open::after { content: ""; position: absolute; z-index: 2; width: 14px; height: 14px; border: 0 solid var(--accent); pointer-events: none; transition: top .35s var(--ease), left .35s var(--ease), right .35s var(--ease), bottom .35s var(--ease); }
+.fig-open::before { top: 10px; left: 10px; border-width: 1px 0 0 1px; }
+.fig-open::after { right: 10px; bottom: 10px; border-width: 0 1px 1px 0; }
+.fig-open:hover::before { top: 6px; left: 6px; }
+.fig-open:hover::after { right: 6px; bottom: 6px; }
+.fig-badge { position: absolute; z-index: 2; left: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 7px; padding: 6px 9px; background: rgba(12, 16, 19, .7); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); font: 500 .58rem/1 var(--f-mono); letter-spacing: .1em; color: var(--ink); }
+.fig-badge svg { width: 9px; height: 9px; }
+.fig-coord { position: absolute; z-index: 2; right: 12px; top: 12px; padding: 5px 8px; background: rgba(12, 16, 19, .62); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); font: 500 .56rem/1.3 var(--f-mono); letter-spacing: .06em; color: var(--ink); }
+.fig figcaption { display: flex; gap: 12px; align-items: baseline; font: 400 .62rem/1.5 var(--f-mono); letter-spacing: .02em; color: var(--ink-2); }
+.fig-no { flex: none; color: var(--accent); letter-spacing: .06em; }
+
+.media--hero { grid-template: minmax(0, 1fr) / minmax(0, 1fr); }
+.media--trio { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: minmax(0, 1.3fr) minmax(0, 1fr); }
+.media--trio > :first-child { grid-column: 1 / -1; }
+.media--five { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: repeat(2, minmax(0, 1fr)); }
+.media--five > :first-child { grid-row: 1 / -1; }
+.media--side { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: repeat(2, minmax(0, 1fr)); }
+.media--side > :first-child { grid-row: 1 / -1; }
+.media--hero4 { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: minmax(0, 1.5fr) minmax(0, 1fr); }
+.media--hero4 > :first-child { grid-column: 1 / -1; }
+.media--album { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.media--album > .fig-open { height: 100%; }
+.media--album > :first-child { grid-column: span 2; grid-row: span 2; }
+.media--vid2 { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: minmax(0, 1.2fr) minmax(0, 1fr); }
+.media--vid2 > :nth-child(-n+2) { grid-column: span 2; }
+.media--portrait { grid-column: 8 / -1; justify-self: center; height: 100%; width: auto; max-width: 100%; aspect-ratio: var(--mar); display: flex; }
+.media--portrait .fig { flex: 1; }
+.media--fit { height: auto; max-height: 100%; align-self: center; }
+.media--fit .fig-open { flex: none; aspect-ratio: var(--ar); max-height: calc(100vh - var(--top) - var(--bottom) - 90px); }
+.media--row { height: auto; align-self: center; display: flex; gap: 14px; align-items: flex-start; }
+.media--row .fig { flex: var(--g, 1) 1 0; min-width: 0; }
+.media--row .fig-open { flex: none; aspect-ratio: var(--ar); }
+
+/* specimens */
+.lay-tray .sheet-text { grid-column: 1 / span 4; }
+.media--tray { grid-column: 5 / -1; height: auto; align-self: center; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.spec { min-width: 0; display: flex; flex-direction: column; border: 1px solid var(--rule); background: rgba(18, 24, 28, .72); }
+.spec .fig-open { flex: none; aspect-ratio: 3 / 4; }
+.spec-label { display: grid; gap: 4px; padding: 11px 12px 12px; border-top: 1px solid var(--rule); }
+.spec-no { margin: 0; font: 500 .54rem/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.spec-name { margin: 3px 0 0; font-size: .9rem; font-weight: 600; line-height: 1.2; }
+.spec-latin { margin: 0; font-size: .8rem; font-style: italic; color: var(--ink-2); }
+.spec-data { margin: 4px 0 0; font: 400 .54rem/1.6 var(--f-mono); letter-spacing: .02em; color: var(--ink-3); }
+
+/* statement sheet */
+.lay-statement { grid-template-rows: auto minmax(0, 1fr); row-gap: clamp(14px, 2.4vh, 28px); }
+.st-head { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.bigword { margin: 0; font-family: var(--f-display); font-stretch: 125%; font-weight: 700; font-size: clamp(2.2rem, 9.2vw, 9rem); line-height: .86; letter-spacing: -.025em; text-transform: uppercase; }
+.lay-statement .sheet-text { grid-row: 2; align-self: start; }
+.lay-statement .media { grid-row: 2; align-self: start; }
+
+/* film */
+.film { grid-column: 6 / -1; align-self: center; list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); max-height: 100%; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--rule-2) transparent; }
+.film-row { display: grid; grid-template-columns: 30px 64px minmax(0, 1fr) auto; align-items: center; gap: 16px; width: 100%; padding: 11px 4px; border-bottom: 1px solid var(--rule); text-align: left; text-decoration: none; transition: background-color .25s; }
+.film-row:hover { background: rgba(235, 231, 223, .035); }
+.film .n { font: 500 .6rem/1 var(--f-mono); color: var(--ink-3); }
+.film .th { position: relative; width: 64px; aspect-ratio: 16 / 10; overflow: hidden; background: var(--ground-3); border: 1px solid var(--rule); display: grid; place-items: center; }
+.film .th img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .9; }
+.film .th svg { position: relative; width: 12px; height: 12px; color: var(--ink); }
+.film .t { display: block; font-size: .95rem; font-weight: 500; line-height: 1.3; color: var(--ink); }
+.film .m { display: block; margin-top: 4px; font: 400 .58rem/1.5 var(--f-mono); letter-spacing: .03em; color: var(--ink-3); }
+.film .mine { color: var(--accent); }
+.film .k { white-space: nowrap; padding: 6px 8px; border: 1px solid var(--rule-2); font: 500 .56rem/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); transition: border-color .25s, color .25s; }
+.film-row:hover .k { border-color: var(--accent); color: var(--accent); }
+
+/* about */
+.contact { grid-column: 7 / -1; align-self: center; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+.contact .fig-open { aspect-ratio: 1; flex: none; }
+.contact .fig-open::before, .contact .fig-open::after { width: 8px; height: 8px; }
+.contact .cn { position: absolute; z-index: 2; left: 5px; bottom: 4px; font: 500 .5rem/1 var(--f-mono); color: var(--ink); text-shadow: 0 1px 2px rgba(0, 0, 0, .8); }
+.links { display: flex; flex-wrap: wrap; gap: 10px; }
+.sources { list-style: none; margin: 0; padding: 12px 0 0; border-top: 1px solid var(--rule); display: grid; gap: 7px; font: 400 .6rem/1.55 var(--f-mono); letter-spacing: .02em; color: var(--ink-3); }
+.sources a { color: var(--ink-2); text-decoration: underline; text-decoration-color: var(--rule-2); text-underline-offset: 3px; }
+.sources a:hover { color: var(--accent); text-decoration-color: currentColor; }
+
+/* reveal on entry (only applied while a sheet is entering; at rest everything is visible) */
+.rv { transition: opacity .7s var(--ease), transform .7s var(--ease); transition-delay: calc(var(--i, 0) * 65ms); }
+.sheet.pre .rv { opacity: 0; transform: translate3d(0, 14px, 0); transition: none; }
+.sheet.pre .fig-open img, .sheet.pre .fig-open video { transform: scale(1.08); transition: none; }
+
+/* ---------- cover ---------- */
+.sheet--cover .sheet-inner { display: block; padding: 0; }
+.xsec { --xs-w: 74%; position: absolute; inset: 0; overflow: hidden; background: var(--ground); }
+.xsec-img { position: absolute; top: 0; height: 100%; max-width: none; object-fit: cover; }
+.xsec-eng { left: 0; width: var(--xs-w); object-position: 70% 44%; }
+.xsec-field { left: calc(100% - var(--xs-w)); width: var(--xs-w); object-position: 50% 60%; }
+.xsec-scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(12, 16, 19, .78) 0%, rgba(12, 16, 19, 0) 20%, rgba(12, 16, 19, 0) 36%, rgba(12, 16, 19, .7) 66%, rgba(12, 16, 19, .97) 100%); }
+.xsec-svg { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; pointer-events: none; color: var(--ink); overflow: visible; }
+.xsec-svg text { font-family: var(--f-mono); font-size: 13px; font-weight: 600; fill: currentColor; }
+.xsec-tag { position: absolute; z-index: 3; margin: 0; top: calc(var(--top) + env(safe-area-inset-top, 0px) + 14px); display: grid; gap: 4px; font: 500 .62rem/1.3 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); text-shadow: 0 1px 8px rgba(0, 0, 0, .6); }
+.xsec-tag span { color: var(--ink-2); letter-spacing: .04em; text-transform: none; }
+.xsec-tag--eng { left: calc(var(--rail) + env(safe-area-inset-left, 0px)); }
+.xsec-tag--field { right: var(--gut); text-align: right; }
+.xsec-tag--eng::before, .xsec-tag--field::before { content: ""; display: block; width: 22px; height: 2px; margin-bottom: 6px; }
+.xsec-tag--eng::before { background: var(--eng); }
+.xsec-tag--field::before { background: var(--field); justify-self: end; }
+.xsec-handle { position: absolute; z-index: 4; left: 50%; top: 50%; width: 48px; height: 48px; margin: -24px 0 0 -24px; border-radius: 50%; border: 1px solid rgba(235, 231, 223, .85); background: rgba(12, 16, 19, .5); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); display: grid; place-items: center; cursor: ew-resize; touch-action: none; transition: transform .25s var(--ease), background-color .25s; }
+.xsec-handle:hover, .xsec.dragging .xsec-handle { transform: scale(1.08); background: rgba(12, 16, 19, .75); }
+.xsec-handle svg { width: 20px; height: 20px; }
+.cover-copy {
+  position: absolute; z-index: 3;
+  left: calc(var(--rail) + env(safe-area-inset-left, 0px)); right: var(--gut);
+  bottom: calc(var(--bottom) + env(safe-area-inset-bottom, 0px) + 30px);
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 410px); align-items: end; gap: 22px 56px;
+  pointer-events: none;
+}
+.cover-copy > * { pointer-events: auto; min-width: 0; }
+.cover-left { display: flex; flex-direction: column; gap: 14px; }
+.cover-name { margin: 0; font-family: var(--f-display); font-stretch: 116%; font-weight: 600; font-size: clamp(3rem, 8.4vw, 9rem); line-height: .86; letter-spacing: -.028em; }
+.cover-sub { margin: 4px 0 0; display: flex; align-items: center; gap: 12px; font: 500 .7rem/1 var(--f-mono); letter-spacing: .24em; text-transform: uppercase; color: var(--ink-2); }
+.cover-sub::before { content: "A"; display: grid; place-items: center; width: 22px; height: 22px; border: 1px solid var(--ink-2); border-radius: 50%; font-size: .6rem; letter-spacing: 0; }
+.cover-right { display: grid; gap: 16px; }
+.cover-lede { margin: 0; max-width: 40ch; font-size: 1.02rem; line-height: 1.6; color: var(--ink); }
+.cover-role { margin: 0; font: 400 .6rem/1.65 var(--f-mono); letter-spacing: .04em; color: var(--ink-2); }
+
+/* ---------- dialogs ---------- */
+dialog { color: var(--ink); }
+dialog::backdrop { background: transparent; }
+.wu { position: fixed; inset: 0 0 0 auto; margin: 0; padding: 0; border: 0; border-left: 1px solid var(--rule); width: min(660px, 100vw); max-width: 100vw; height: 100%; max-height: 100%; background: var(--ground-2); overflow-y: auto; overscroll-behavior: contain; transform: translateX(104%); transition: transform .5s var(--ease); }
+.wu.in { transform: none; }
+.wu::backdrop { background: rgba(6, 9, 11, 0); transition: background-color .45s; }
+.wu.in::backdrop { background: rgba(6, 9, 11, .64); }
+.wu-head { position: sticky; top: 0; z-index: 2; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: calc(20px + env(safe-area-inset-top, 0px)) max(24px, env(safe-area-inset-right, 0px)) 18px 32px; background: rgba(18, 24, 28, .94); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule); }
+.wu-no { margin: 0 0 8px; font: 500 .6rem/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.wu-title { margin: 0; font-family: var(--f-display); font-stretch: 110%; font-weight: 600; font-size: 1.75rem; line-height: 1.05; letter-spacing: -.01em; }
+.x-btn { flex: none; width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid var(--rule-2); transition: border-color .25s, color .25s; }
+.x-btn:hover { border-color: var(--accent); color: var(--accent); }
+.x-btn svg { width: 14px; height: 14px; }
+.wu-body { padding: 8px max(24px, env(safe-area-inset-right, 0px)) calc(56px + env(safe-area-inset-bottom, 0px)) 32px; }
+.wu-body h3 { margin: 30px 0 12px; display: flex; align-items: center; gap: 12px; font: 500 .62rem/1.3 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.wu-body h3::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+.wu-body p { margin: 0 0 14px; max-width: 62ch; line-height: 1.7; color: var(--ink-2); }
+.wu-body p strong { color: var(--ink); font-weight: 500; }
+.wu-body .tbl { overflow-x: auto; }
+.wu-body table { width: 100%; border-collapse: collapse; font-size: .86rem; }
+.wu-body th { padding: 8px 12px 8px 0; text-align: left; border-bottom: 1px solid var(--rule-2); font: 500 .56rem/1.3 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.wu-body td { padding: 10px 12px 10px 0; vertical-align: top; border-bottom: 1px solid var(--rule); color: var(--ink-2); line-height: 1.45; }
+.wu-body td:first-child { white-space: nowrap; font: 400 .66rem/1.7 var(--f-mono); color: var(--ink-3); }
+.wu-body td strong { color: var(--ink); font-weight: 500; }
+.wu-links { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.wu-links a { display: flex; justify-content: space-between; gap: 16px; padding: 11px 14px; border: 1px solid var(--rule); text-decoration: none; font-size: .88rem; transition: border-color .25s; }
+.wu-links a:hover { border-color: var(--accent); }
+.wu-links a span { font: 400 .58rem/1.6 var(--f-mono); color: var(--ink-3); letter-spacing: .04em; white-space: nowrap; }
+
+.lb, .ix { position: fixed; inset: 0; margin: 0; padding: 0; border: 0; width: 100%; height: 100%; max-width: 100%; max-height: 100%; opacity: 0; transition: opacity .3s; }
+.lb { background: rgba(8, 11, 13, .97); overflow: hidden; }
+.lb.in, .ix.in { opacity: 1; }
+.lb-wrap { position: absolute; inset: 0; display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 14px; padding: calc(64px + env(safe-area-inset-top, 0px)) max(72px, env(safe-area-inset-right, 0px)) calc(20px + env(safe-area-inset-bottom, 0px)) max(72px, env(safe-area-inset-left, 0px)); }
+.lb-media { min-height: 0; display: grid; place-items: center; }
+.lb-media img, .lb-media video { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+.lb-cap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; font: 400 .66rem/1.55 var(--f-mono); letter-spacing: .02em; color: var(--ink-2); }
+.lb-cap b { color: var(--ink); font-weight: 500; }
+.lb-num { color: var(--accent); }
+.lb .x-btn { position: absolute; z-index: 2; top: calc(14px + env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); }
+.lb-step { position: absolute; z-index: 2; top: 50%; margin-top: -22px; width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid var(--rule-2); background: rgba(12, 16, 19, .6); transition: border-color .25s, color .25s; }
+.lb-step:hover { border-color: var(--accent); color: var(--accent); }
+.lb-step svg { width: 16px; height: 16px; }
+.lb-prev { left: max(16px, env(safe-area-inset-left, 0px)); }
+.lb-next { right: max(16px, env(safe-area-inset-right, 0px)); }
+
+.ix { background: rgba(10, 14, 16, .975); overflow-y: auto; overscroll-behavior: contain; }
+.ix-wrap { max-width: 1400px; margin: 0 auto; padding: calc(22px + env(safe-area-inset-top, 0px)) max(28px, env(safe-area-inset-right, 0px)) calc(48px + env(safe-area-inset-bottom, 0px)) max(28px, env(safe-area-inset-left, 0px)); }
+.ix-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 26px; }
+.ix-head h2 { margin: 0; font: 500 .66rem/1 var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
+.ix-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 22px 16px; }
+.ix-card { display: grid; gap: 9px; text-align: left; min-width: 0; }
+.ix-thumb { display: block; aspect-ratio: 4 / 3; overflow: hidden; background: var(--ground-2); border: 1px solid var(--rule); }
+.ix-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
+.ix-card:hover .ix-thumb img { transform: scale(1.04); }
+.ix-card[aria-current="true"] .ix-thumb { border-color: var(--accent); }
+.ix-meta { display: flex; gap: 10px; align-items: baseline; min-width: 0; }
+.ix-n { flex: none; font: 500 .6rem/1 var(--f-mono); letter-spacing: .06em; color: var(--cross); }
+.ix-card[data-domain="eng"] .ix-n { color: var(--eng); }
+.ix-card[data-domain="field"] .ix-n { color: var(--field); }
+.ix-t { font-size: .86rem; font-weight: 500; line-height: 1.25; }
+.ix-d { font: 400 .54rem/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1240px) {
+  .tb-grid { grid-template-columns: 90px minmax(0, 2fr) minmax(0, 1.6fr) minmax(0, 1.2fr) auto; }
+  .tb-domain, .tb-scale { display: none; }
+}
+@media (max-height: 760px) and (min-width: 900px) {
+  :root { --top: 56px; --bottom: 52px; }
+  .h2 { font-size: clamp(1.9rem, 3.3vw, 3.2rem); }
+  .sheet-text { gap: 14px; }
+  .lede { font-size: .95rem; line-height: 1.55; }
+  .stat-n { font-size: 1.9rem; }
+  .facts dt, .facts dd { padding: 7px 0; }
+  .results li { padding: 6px 0; }
+}
+@media (max-width: 899px) {
+  :root { --top: 54px; --bottom: 54px; --rail: 0px; --gut: max(16px, env(safe-area-inset-right, 0px)); }
+  body { font-size: 15px; }
+  .top { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .mark span { display: none; }
+  .rail { display: none; }
+  .tb { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(12px, env(safe-area-inset-right, 0px)); }
+  .tb-grid { grid-template-columns: 74px minmax(0, 1fr) auto; }
+  .tb-domain, .tb-scale, .tb-loc, .tb-date { display: none; }
+  .nav-btn { width: 38px; height: 38px; }
+  .sheet-inner { display: flex; flex-direction: column; gap: 22px; overflow-y: auto; overscroll-behavior: contain;
+    padding: calc(var(--top) + env(safe-area-inset-top, 0px) + 6px) var(--gut) calc(var(--bottom) + env(safe-area-inset-bottom, 0px) + 30px) max(16px, env(safe-area-inset-left, 0px)); }
+  .sheet-text { order: 2; max-height: none; overflow: visible; padding-right: 0; align-self: stretch; }
+  .media, .media--portrait, .media--fit, .media--row, .media--tray, .media--trio, .media--five, .media--side, .media--hero4, .media--vid2, .media--album { order: 1; flex: none; height: auto; width: 100%; max-width: 100%; aspect-ratio: auto; align-self: stretch; }
+  .fig-open { flex: none; aspect-ratio: var(--ar, 4 / 3); max-height: 62svh; }
+  .media--fit .fig-open { max-height: 62svh; }
+  .media--portrait { display: block; }
+  .media--album { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto; }
+  .media--album > .fig-open { aspect-ratio: 1; height: auto; }
+  .media--album > :first-child { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 4 / 3; }
+  .media--trio, .media--five, .media--side, .media--hero4, .media--vid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto; }
+  .media--vid2 > :nth-child(-n+2) { grid-column: 1 / -1; }
+  .media--five > :first-child, .media--side > :first-child, .media--hero4 > :first-child { grid-column: 1 / -1; grid-row: auto; }
+  .media--row { display: flex; }
+  .media--tray { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .spec .fig-open { max-height: none; }
+  .lay-statement .st-head { order: 0; }
+  .lay-statement .media { order: 1; }
+  .lay-statement .sheet-text { order: 2; }
+  .film { order: 2; max-height: none; overflow: visible; }
+  .film-row { grid-template-columns: 52px minmax(0, 1fr) auto; gap: 12px; }
+  .film .n { display: none; }
+  .film .th { width: 52px; }
+  .contact { order: 3; }
+  .xsec { --xs-w: 86%; }
+  .xsec-eng { object-position: 50% 44%; }
+  .cover-role { display: none; }
+  .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ladder { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ladder button:nth-child(2) { border-right: 0; }
+  .ladder button:nth-child(-n+2) { border-bottom: 1px solid var(--rule); }
+  .xsec-tag { font-size: .56rem; }
+  .xsec-tag--eng { left: 16px; }
+  .cover-copy { left: max(16px, env(safe-area-inset-left, 0px)); grid-template-columns: minmax(0, 1fr); gap: 16px; bottom: calc(var(--bottom) + env(safe-area-inset-bottom, 0px) + 18px); }
+  .cover-lede { font-size: .95rem; }
+  .ix-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 10px; }
+  .ix-d { display: none; }
+  .wu-head { padding-left: 20px; }
+  .wu-body { padding-left: 20px; }
+  .lb-wrap { padding-left: max(12px, env(safe-area-inset-left, 0px)); padding-right: max(12px, env(safe-area-inset-right, 0px)); }
+  .lb-step { top: auto; bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+}
+@media (max-width: 480px) {
+  .stat-k { font-size: .54rem; }
+  .facts dt { padding-right: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; transition-delay: 0s !important; }
+  .fig-open:hover img, .fig-open:hover video { transform: none; }
+}
+</style>
+
+</head>
+<body>
+<canvas class="terrain" id="terrain" aria-hidden="true"></canvas>
+<div class="veil" aria-hidden="true"></div>
+
+<header class="top">
+  <a class="mark" href="#s00" data-go="0"><b>N. Krupkin</b><span>Cross Section</span></a>
+  <div class="top-right">
+    <span class="count" id="count" aria-hidden="true"><b>00</b> / 16</span>
+    <button class="chip-btn" type="button" data-index aria-haspopup="dialog">
+      <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 1h4v4H1zM7 1h4v4H7zM1 7h4v4H1zM7 7h4v4H7z" fill="none" stroke="currentColor"/></svg>Index
+    </button>
+  </div>
+</header>
+
+<nav class="rail" aria-label="Sheets"><ol id="rail"></ol></nav>
+
+<svg class="cut" id="cut" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="hatch-cut" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="currentColor" stroke-width="1.3"/>
+    </pattern>
+  </defs>
+  <polygon class="c-band" fill="url(#hatch-cut)" opacity=".8"/>
+  <line class="c-line" stroke="currentColor" stroke-width="1.5" stroke-dasharray="34 7 6 7"/>
+  <line class="c-end c-end-a" stroke="currentColor" stroke-width="4"/>
+  <line class="c-end c-end-b" stroke="currentColor" stroke-width="4"/>
+  <g class="c-arr c-arr-a"><line stroke="currentColor" stroke-width="1.5"/><path fill="currentColor"/><text class="cut-letter" text-anchor="middle"></text></g>
+  <g class="c-arr c-arr-b"><line stroke="currentColor" stroke-width="1.5"/><path fill="currentColor"/><text class="cut-letter" text-anchor="middle"></text></g>
+  <text class="c-label" text-anchor="middle"></text>
+</svg>
+
+<main class="stage" id="stage">
+
+  <!-- 00 · COVER -->
+  <section class="sheet sheet--cover is-active" id="s00" data-domain="cross" data-title="Cross Section" data-loc="Millburn, NJ" data-date="2023–2027" data-scale="—" data-thumb="media/pushback-states-sm.webp" aria-roledescription="slide" aria-label="Sheet 00: Cross Section">
+    <div class="sheet-inner">
+      <div class="xsec" id="xsec">
+        <img class="xsec-img xsec-eng" src="media/pushback-states.webp" width="1575" height="1196" fetchpriority="high" alt="7405R's Over Under robot seen from above on a New Jersey competition field, with its roller intake, pneumatic lines, and blue 7405R team plates">
+        <img class="xsec-img xsec-field" src="media/canada-lake.webp" width="1500" height="2000" fetchpriority="high" alt="Sunset over Canada Lake from the bow of a kayak, with a fishing rod and a landing net strapped to the deck">
+        <div class="xsec-scrim"></div>
+        <svg class="xsec-svg" aria-hidden="true" focusable="false">
+          <defs>
+            <pattern id="hatch-cover" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <line x1="0" y1="0" x2="0" y2="7" stroke="currentColor" stroke-width="1.1"/>
+            </pattern>
+          </defs>
+          <polygon class="c-band" fill="url(#hatch-cover)" opacity=".75"/>
+          <line class="c-line" stroke="currentColor" stroke-width="1.4" stroke-dasharray="34 7 6 7"/>
+          <line class="c-end c-end-a" stroke="currentColor" stroke-width="4"/>
+          <line class="c-end c-end-b" stroke="currentColor" stroke-width="4"/>
+          <g class="c-arr c-arr-a"><line stroke="currentColor" stroke-width="1.5"/><path fill="currentColor"/><text text-anchor="middle"></text></g>
+          <g class="c-arr c-arr-b"><line stroke="currentColor" stroke-width="1.5"/><path fill="currentColor"/><text text-anchor="middle"></text></g>
+        </svg>
+        <p class="xsec-tag xsec-tag--eng">Engineering<span>7405R · Over Under · 2023–24</span></p>
+        <p class="xsec-tag xsec-tag--field">Outdoors<span>Canada Lake · Sept 2026</span></p>
+        <div class="xsec-handle" id="xsec-handle" tabindex="0" role="slider" aria-label="Section line: drag to cut between engineering and outdoors" aria-valuemin="6" aria-valuemax="94" aria-valuenow="50">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5 2 10l5 5M13 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+        </div>
+      </div>
+      <div class="cover-copy">
+        <div class="cover-left">
+          <p class="eyebrow rv">Portfolio · Class of 2027</p>
+          <h1 class="cover-name rv">Nathan<br>Krupkin</h1>
+          <p class="cover-sub rv">Cross Section</p>
+        </div>
+        <div class="cover-right">
+          <p class="cover-lede rv">I build robots and machines, and I spend as much time outdoors as I can. This portfolio is a cross section through both. Drag the section line to cut between them.</p>
+          <p class="cover-role rv">VEX team 7405R, four seasons: design &amp; build · driver · notebook &amp; strategy</p>
+          <div class="actions rv">
+            <button class="btn btn-solid" type="button" data-go="1">Begin <span class="arr" aria-hidden="true">→</span></button>
+            <button class="btn" type="button" data-index aria-haspopup="dialog">Index</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 · TEAM -->
+  <section class="sheet" id="s01" data-domain="eng" data-title="7405R Riptide" data-loc="Millburn High School, NJ" data-date="2023–2027" data-scale="NTS" data-thumb="media/hang-sm.webp" aria-roledescription="slide" aria-label="Sheet 01: 7405R Riptide">
+    <div class="sheet-inner">
+      <div class="sheet-text">
+        <p class="eyebrow rv">Part I · Engineering</p>
+        <h2 class="h2 rv">7405R Riptide</h2>
+        <p class="lede rv">Four seasons on Millburn High School's VEX robotics team. Every season brings a new game and a robot built from scratch to play it. I design and build, drive in matches, and work on the engineering notebook and strategy.</p>
+        <div class="stats rv">
+          <div class="stat"><div class="stat-n">3</div><div class="stat-k">World Championships: 2024, 2025, 2026</div></div>
+          <div class="stat"><div class="stat-n">4</div><div class="stat-k">Excellence Awards, 2024–26</div></div>
+          <div class="stat"><div class="stat-n">198</div><div class="stat-k">Official skills score, 5th in the world, Jan 2026</div></div>
+        </div>
+        <div class="ladder rv" role="group" aria-label="Seasons">
+          <button type="button" data-go="2"><span class="y">2023–24</span><span class="g">Over Under</span></button>
+          <button type="button" data-go="3"><span class="y">2024–25</span><span class="g">High Stakes</span></button>
+          <button type="button" data-go="4"><span class="y">2025–26</span><span class="g">Push Back</span></button>
+          <button type="button" data-go="8"><span class="y now">2026–27 · now</span><span class="g">Override</span></button>
+        </div>
+        <div class="actions rv"><button class="btn" type="button" data-wu="01">Full write-up <span class="arr" aria-hidden="true">→</span></button></div>
+      </div>
+      <div class="media media--portrait" style="--mar: 816 / 1197; --ar: 816 / 1197">
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/hang.webp" data-cap="Hang mechanism test." aria-label="Open photo: hang mechanism test">
+            <img src="media/hang.webp" width="816" height="1197" loading="lazy" decoding="async" alt="A 7405R robot hanging by its top hook, lit in dark blue">
+          </button>
+          <figcaption><span class="fig-no">FIG 01.1</span>Hang mechanism test.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 · OVER UNDER -->
+  <section class="sheet" id="s02" data-domain="eng" data-title="Over Under" data-loc="Dallas, TX (Worlds)" data-date="2023–24" data-scale="NTS" data-thumb="media/overunder-states-sm.webp" aria-roledescription="slide" aria-label="Sheet 02: Over Under">
+    <div class="sheet-inner">
+      <div class="sheet-text">
+        <p class="eyebrow rv">2023–24 · Freshman season</p>
+        <h2 class="h2 rv">Over Under</h2>
+        <p class="lede rv">Robots push triballs into goals and over a barrier that splits the field, then climb an elevation bar to finish the match. In my first season we won the New Jersey State Championship and its Design Award, and reached the division semifinals at Worlds.</p>
+        <dl class="facts rv">
+          <dt>State</dt><dd><strong>Tournament Champion · Design Award</strong>, New Jersey State Championship</dd>
+          <dt>Worlds</dt><dd>Dallas, April 2024: division semifinals</dd>
+          <dt>My role</dt><dd>Design &amp; build, driver, notebook &amp; strategy</dd>
+        </dl>
+        <div class="actions rv"><button class="btn" type="button" data-wu="02">Full write-up <span class="arr" aria-hidden="true">→</span></button></div>
+      </div>
+      <div class="media media--trio">
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/overunder-states.webp" data-cap="Over Under robot with the New Jersey State Championship Design Award and Tournament Champion banners, 2024." aria-label="Open photo: State Champion and Design Award, 2024" style="--ar: 2000 / 1529">
+            <img src="media/overunder-states-sm.webp" loading="lazy" decoding="async" alt="The 7405R Over Under robot on a table in front of New Jersey State Championship banners for Design Award and Tournament Champion, with trophies on either side">
+          </button>
+          <figcaption><span class="fig-no">FIG 02.1</span>State Champion and Design Award, 2024</figcaption>
+        </figure>
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/overunder-climb.webp" data-cap="Climbing the elevation bar at the end of a match." aria-label="Open photo: Elevation climb" style="--ar: 2000 / 1333">
+            <img src="media/overunder-climb-sm.webp" loading="lazy" decoding="async" alt="The 7405R Over Under robot climbing the red elevation bar, with green triballs on the field">
+          </button>
+          <figcaption><span class="fig-no">FIG 02.2</span>Elevation climb</figcaption>
+        </figure>
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/pushback-states.webp" data-cap="Over Under robot on a New Jersey competition field, 2023–24." aria-label="Open photo: From above" style="--ar: 1575 / 1196">
+            <img src="media/pushback-states-sm.webp" loading="lazy" decoding="async" alt="7405R's Over Under robot from above, showing its roller intake, polycarbonate plates, and pneumatic tubing">
+          </button>
+          <figcaption><span class="fig-no">FIG 02.3</span>From above</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · HIGH STAKES -->
+  <section class="sheet" id="s03" data-domain="eng" data-title="High Stakes" data-loc="Worcester, MA · Dallas, TX" data-date="2024–25" data-scale="NTS" data-thumb="media/highstakes-field-sm.webp" aria-roledescription="slide" aria-label="Sheet 03: High Stakes">
+    <div class="sheet-inner">
+      <div class="sheet-text">
+        <p class="eyebrow rv">2024–25 · Sophomore season</p>
+        <h2 class="h2 rv">High Stakes</h2>
+        <p class="lede rv">Robots score rings onto stakes, carry mobile goals into the corners, and climb a ladder at the end. We won the Excellence Award at the Wave at WPI Signature Event, won the New Jersey State Championship again, and reached the Opportunity Division finals at Worlds.</p>
+        <dl class="facts rv">
+          <dt>Signature</dt><dd><strong>Excellence Award</strong>, Wave at WPI Signature Event</dd>
+          <dt>State</dt><dd><strong>Tournament Champion</strong>, New Jersey State Championship</dd>
+          <dt>Worlds</dt><dd>Dallas, 2025: Opportunity Division finals</dd>
+        </dl>
+        <div class="actions rv">
+          <button class="btn" type="button" data-wu="03">Full write-up <span class="arr" aria-hidden="true">→</span></button>
+          <a class="btn" href="https://www.youtube.com/watch?v=OvjGRyFz8NQ" target="_blank" rel="noopener">Worlds reveal <span class="arr" aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="media media--vid2">
+        <figure class="fig">
+          <button class="fig-open" type="button" data-kind="video" data-src="media/clip-8019.mp4" data-poster="media/clip-8019-poster.webp" data-cap="Practice run: scoring rings onto a mobile goal, April 2025." aria-label="Play video: Ring scoring practice" style="--ar: 16 / 9">
+            <video data-auto muted loop playsinline preload="none" poster="media/clip-8019-poster.webp" src="media/clip-8019.mp4"></video>
+            <span class="fig-badge"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z" fill="currentColor"/></svg>0:15</span>
+          </button>
+          <figcaption><span class="fig-no">FIG 03.1</span>Ring scoring practice</figcaption>
+        </figure>
+        <figure class="fig">
+          <button class="fig-open" type="button" data-kind="video" data-src="media/clip-8009.mp4" data-poster="media/clip-8009-poster.webp" data-cap="Practice run: filling a mobile goal with red rings, April 2025." aria-label="Play video: Stacking a mobile goal" style="--ar: 16 / 9">
+            <video data-auto muted loop playsinline preload="none" poster="media/clip-8009-poster.webp" src="media/clip-8009.mp4"></video>
+            <span class="fig-badge"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z" fill="currentColor"/></svg>0:15</span>
+          </button>
+          <figcaption><span class="fig-no">FIG 03.2</span>Stacking a mobile goal</figcaption>
+        </figure>
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/highstakes-field.webp" data-cap="Scoring rings on a mobile goal at NJIT." aria-label="Open photo: Mobile goal, NJIT" style="--ar: 1440 / 1187">
+            <img src="media/highstakes-field-sm.webp" loading="lazy" decoding="async" alt="The 7405R High Stakes robot holding a ring beside a mobile goal stacked with six red rings">
+          </button>
+          <figcaption><span class="fig-no">FIG 03.3</span>Mobile goal, NJIT</figcaption>
+        </figure>
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/highstakes-states.webp" data-cap="New Jersey State Championship, Tournament Champion, 2024–25." aria-label="Open photo: NJ State Champion" style="--ar: 2000 / 1649">
+            <img src="media/highstakes-states-sm.webp" loading="lazy" decoding="async" alt="The High Stakes robot in a wizard hat beside the Tournament Champion trophy on a New Jersey State Championship banner">
+          </button>
+          <figcaption><span class="fig-no">FIG 03.4</span>NJ State Champion</figcaption>
+        </figure>
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/highstakes-wpi.webp" data-cap="Excellence Award, Wave at WPI Signature Event, 2024–25." aria-label="Open photo: WPI Excellence" style="--ar: 1362 / 1884">
+            <img src="media/highstakes-wpi-sm.webp" loading="lazy" decoding="async" alt="The robot in a wizard hat with the 2024–25 Excellence Award trophy in front of the Wave at WPI Signature Event banner">
+          </button>
+          <figcaption><span class="fig-no">FIG 03.5</span>WPI Excellence</figcaption>
+        </figure>
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/highstakes-goal.webp" data-cap="High Stakes robot beside a scored mobile goal." aria-label="Open photo: Mobile goal" style="--ar: 1138 / 1139">
+            <img src="media/highstakes-goal-sm.webp" loading="lazy" decoding="async" alt="7405R's High Stakes robot under red and blue light beside a mobile goal stacked with blue rings">
+          </button>
+          <figcaption><span class="fig-no">FIG 03.6</span>Mobile goal</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · PUSH BACK SEASON -->
+  <section class="sheet" id="s04" data-domain="eng" data-title="Push Back · The Season" data-loc="NJ · MA · IA · MO" data-date="Dec 2025 – Apr 2026" data-scale="NTS" data-thumb="media/wpi-excellence-sm.webp" aria-roledescription="slide" aria-label="Sheet 04: Push Back, the season">
+    <div class="sheet-inner lay-wide">
+      <div class="sheet-text">
+        <p class="eyebrow rv">2025–26 · Push Back</p>
+        <h2 class="h2 rv">The season</h2>
+        <p class="lede rv">Our strongest year: Excellence Awards at a Signature Event and the U.S. Open, a state title with the Design Award, a top-five world skills score, and the Innovate Award at Worlds.</p>
+        <ol class="results rv">
+          <li><span class="d">Dec 2025</span><span class="r">Excellence Award · Finalist</span><span class="e">Wave at WPI Signature Event, Worcester, MA. Qualified us for Worlds.</span></li>
+          <li><span class="d">Dec 2025</span><span class="r">Tournament Champion</span><span class="e">Millburn VEX Tournament, 63 teams</span></li>
+          <li><span class="d">Jan 2026</span><span class="r">198 skills · 5th in the world</span><span class="e">Official robot skills: 102 driver + 96 programming</span></li>
+          <li><span class="d">Feb 2026</span><span class="r">Tournament Champion</span><span class="e">Valentine's Vextravaganza</span></li>
+          <li class="hl"><span class="d">Mar 13–14</span><span class="r">Tournament Champion · Design Award</span><span class="e">New Jersey State Championship, NJIT, Newark</span></li>
+          <li class="hl"><span class="d">Mar 16–18</span><span class="r">Excellence Award · Skills 3rd · Division Finalist</span><span class="e">CREATE U.S. Open, Council Bluffs, IA</span></li>
+          <li class="hl"><span class="d">Apr 21–24</span><span class="r">Innovate Award · Division Finalist</span><span class="e">VEX Robotics World Championship, St. Louis</span></li>
+        </ol>
+        <div class="actions rv">
+          <button class="btn" type="button" data-wu="04">Full write-up <span class="arr" aria-hidden="true">→</span></button>
+          <button class="btn" type="button" data-go="6">U.S. Open <span class="arr" aria-hidden="true">→</span></button>
+        </div>
+      </div>
+      <div class="media media--trio">
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/wpi-excellence.webp" data-cap="7405R with the Excellence Award banner at the Wave at WPI Signature Event, December 2025." aria-label="Open photo: the team with the WPI Excellence Award" style="--ar: 4 / 3">
+            <img src="media/wpi-excellence.webp" width="1000" height="750" loading="lazy" decoding="async" alt="The 7405R team holding the Excellence Award banner and trophy at the Wave at WPI Signature Event, with the award on the screen behind them">
+          </button>
+          <figcaption><span class="fig-no">FIG 04.1</span>Excellence Award, Wave at WPI Signature Event, Dec 2025.</figcaption>
+        </figure>
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/pushback-wpi.webp" data-cap="Excellence Award and Tournament Finalist trophies, Wave at WPI, December 2025." aria-label="Open photo: WPI trophies" style="--ar: 1440 / 1920">
+            <img src="media/pushback-wpi-sm.webp" loading="lazy" decoding="async" alt="The Push Back robot in a wizard hat between the Wave at WPI Excellence Award and Tournament Finalist trophies on the award banner">
+          </button>
+          <figcaption><span class="fig-no">FIG 04.2</span>WPI trophies</figcaption>
+        </figure>
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/pushback-skills.webp" data-cap="Robot Skills Champion and Excellence Award, 2025–26." aria-label="Open photo: Skills Champion and Excellence" style="--ar: 1485 / 2000">
+            <img src="media/pushback-skills-sm.webp" loading="lazy" decoding="async" alt="The Push Back robot in a wizard hat between Robot Skills Champion and Excellence Award trophies on a reflective gym floor">
+          </button>
+          <figcaption><span class="fig-no">FIG 04.3</span>Skills Champion and Excellence</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · PUSH BACK MACHINE -->
+  <section class="sheet" id="s05" data-domain="eng" data-title="Push Back · The Machine" data-loc="12 × 12 ft field" data-date="2025–26 season" data-scale="NTS" data-thumb="media/clip-practice-poster.webp" aria-roledescription="slide" aria-label="Sheet 05: Push Back, the machine">
+    <div class="sheet-inner">
+      <div class="sheet-text">
+        <p class="eyebrow rv">2025–26 · Push Back</p>
+        <h2 class="h2 rv">The machine</h2>
+        <p class="lede rv">Push Back is played with 88 blocks on a 12-by-12-foot field. Alliances score blocks in two long goals and two center goals, and controlling a goal earns points on top of the blocks inside it. Our robot routes blocks along curved polycarbonate guides up to scoring height.</p>
+        <dl class="facts rv">
+          <dt>Match</dt><dd>15 s autonomous, then 1:45 of driver control</dd>
+          <dt>Format</dt><dd>Two alliances of two robots</dd>
+          <dt>Scoring</dt><dd>3 per block · 10 per long-goal zone controlled · 8 or 6 for the upper or lower center goal</dd>
+          <dt>My role</dt><dd>Design &amp; build, driver, notebook &amp; strategy</dd>
+        </dl>
+        <div class="actions rv"><button class="btn" type="button" data-wu="05">Full write-up <span class="arr" aria-hidden="true">→</span></button></div>
+      </div>
+      <div class="media media--trio">
+        <figure class="fig">
+          <button class="fig-open" type="button" data-kind="video" data-src="media/clip-practice.mp4" data-poster="media/clip-practice-poster.webp" data-cap="Practice cycle on a full field." aria-label="Play video: practice cycle on a full field" style="--ar: 16 / 9">
+            <video data-auto muted loop playsinline preload="none" poster="media/clip-practice-poster.webp" src="media/clip-practice.mp4"></video>
+            <span class="fig-badge"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z" fill="currentColor"/></svg>0:12</span>
+          </button>
+          <figcaption><span class="fig-no">FIG 05.1</span>Practice cycle on a full field.</figcaption>
+        </figure>
+        <figure class="fig">
+          <button class="fig-open" type="button" data-kind="video" data-src="media/clip-longgoal.mp4" data-poster="media/clip-longgoal-poster.webp" data-cap="Long-goal scoring test at home, 11:52 PM, April 2, 2026." aria-label="Play video: long-goal scoring test" style="--ar: 4 / 3">
+            <video data-auto muted loop playsinline preload="none" poster="media/clip-longgoal-poster.webp" src="media/clip-longgoal.mp4"></video>
+            <span class="fig-badge"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z" fill="currentColor"/></svg>0:03</span>
+          </button>
+          <figcaption><span class="fig-no">FIG 05.2</span>Long-goal test, 11:52 PM.</figcaption>
+        </figure>
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/pushback-cad.webp" data-cap="CAD model of the Push Back robot loading blocks into a long goal." aria-label="Open photo: CAD, long-goal scoring" style="--ar: 1001 / 897">
+            <img src="media/pushback-cad.webp" loading="lazy" decoding="async" alt="CAD model of the Push Back robot with red blocks moving through its intake into a long goal">
+          </button>
+          <figcaption><span class="fig-no">FIG 05.3</span>CAD, long-goal scoring</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 · U.S. OPEN -->
+  <section class="sheet" id="s06" data-domain="eng" data-title="CREATE U.S. Open" data-loc="Council Bluffs, IA" data-date="Mar 16–18, 2026" data-scale="NTS" data-thumb="media/awards-sm.webp" aria-roledescription="slide" aria-label="Sheet 06: CREATE U.S. Open">
+    <div class="sheet-inner lay-statement">
+      <div class="st-head">
+        <p class="eyebrow rv">CREATE U.S. Open · Council Bluffs, Iowa · March 2026</p>
+        <h2 class="bigword rv">Excellence</h2>
+      </div>
+      <div class="sheet-text">
+        <p class="lede rv">The Excellence Award is the top award at a VEX event. Judges weigh the engineering notebook, the team interview, qualification rankings, and skills scores together. We won it at the U.S. Open, in a field of about 140 high school teams, a few days after we won our state championship.</p>
+        <dl class="facts rv">
+          <dt>Award</dt><dd>Excellence Award (Domestic)</dd>
+          <dt>Skills</dt><dd>3rd place</dd>
+          <dt>Elims</dt><dd>Captained the No. 3 seed alliance · Division Finalist</dd>
+          <dt>My part</dt><dd>Build, driving, and the notebook the judges read</dd>
+        </dl>
+        <div class="actions rv">
+          <button class="btn" type="button" data-wu="06">Full write-up <span class="arr" aria-hidden="true">→</span></button>
+          <a class="btn" href="https://www.create-found.org/documents/2026TournamentResults.pdf" target="_blank" rel="noopener">Results PDF <span class="arr" aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="media media--fit">
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/awards.webp" data-cap="New Jersey State Championship banners (Tournament Champion, Design Award) and CREATE U.S. Open plaques." aria-label="Open photo: the season's awards" style="--ar: 1476 / 984">
+            <img src="media/awards.webp" width="1476" height="984" loading="lazy" decoding="async" alt="The 7405R robot wearing a wizard hat in front of New Jersey State Championship banners for Tournament Champion and Design Award, with four CREATE U.S. Open plaques on the grass">
+          </button>
+          <figcaption><span class="fig-no">FIG 06.1</span>State banners and U.S. Open plaques.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 · WORLDS 2026 -->
+  <section class="sheet" id="s07" data-domain="eng" data-title="Worlds 2026" data-loc="St. Louis, MO" data-date="Apr 21–24, 2026" data-scale="NTS" data-thumb="media/worlds26-sm.webp" aria-roledescription="slide" aria-label="Sheet 07: Worlds 2026">
+    <div class="sheet-inner lay-statement">
+      <div class="st-head">
+        <p class="eyebrow rv">VEX Robotics World Championship · St. Louis · April 2026</p>
+        <h2 class="bigword rv">Innovate</h2>
+      </div>
+      <div class="sheet-text">
+        <p class="lede rv">Our third World Championship in a row. Judges gave us the Innovate Award, which recognizes a creative engineering solution that the team documents in its notebook, and we reached the division finals for the second straight year.</p>
+        <dl class="facts rv">
+          <dt>Award</dt><dd><strong>Innovate Award</strong>, 2026 World Championship</dd>
+          <dt>Elims</dt><dd>Division Finalist</dd>
+          <dt>Streak</dt><dd>Worlds 2024, 2025, 2026</dd>
+        </dl>
+        <div class="actions rv"><button class="btn" type="button" data-wu="07">Full write-up <span class="arr" aria-hidden="true">→</span></button></div>
+      </div>
+      <div class="media media--fit">
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/worlds26.webp" data-cap="Innovate Award and Division Finalist trophies, VEX Robotics World Championship, St. Louis, 2026." aria-label="Open photo: Innovate Award and Division Finalist, Worlds 2026" style="--ar: 2000 / 1333">
+            <img src="media/worlds26.webp" loading="lazy" decoding="async" alt="The Push Back robot in a wizard hat with a stuffed panda and controller, between the 2026 World Championship Innovate Award and Division Finalist trophies">
+          </button>
+          <figcaption><span class="fig-no">FIG 07.1</span>Innovate Award and Division Finalist, Worlds 2026</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 · OVERRIDE -->
+  <section class="sheet" id="s08" data-domain="eng" data-title="Override" data-loc="Millburn, NJ" data-date="2026–27 season" data-scale="NTS" data-thumb="media/override-sm.webp" aria-roledescription="slide" aria-label="Sheet 08: Override">
+    <div class="sheet-inner lay-wide">
+      <div class="sheet-text">
+        <p class="eyebrow rv">2026–27 · Senior season · In progress</p>
+        <h2 class="h2 rv">Override</h2>
+        <p class="lede rv">This year's game is played with pins and cups. The photo shows an early build and the renders show the CAD design: a compact omni-wheel base, twin towers carrying a chain-driven lift, and a roller intake at the front.</p>
+        <dl class="facts rv">
+          <dt>Status</dt><dd>Building and testing; not yet qualified for Worlds</dd>
+          <dt>My role</dt><dd>Design &amp; build, driver, notebook &amp; strategy</dd>
+        </dl>
+        <div class="actions rv"><button class="btn" type="button" data-wu="08">Full write-up <span class="arr" aria-hidden="true">→</span></button></div>
+      </div>
+      <div class="media media--trio">
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/override.webp" data-cap="Early Override build on a practice field." aria-label="Open photo: early Override build" style="--ar: 4 / 3">
+            <img src="media/override.webp" width="2000" height="1500" loading="lazy" decoding="async" alt="An early Override robot with two tall towers and a chain-driven lift on a field scattered with red, yellow, and blue pins and clear cups">
+          </button>
+          <figcaption><span class="fig-no">FIG 08.1</span>Early build on a practice field.</figcaption>
+        </figure>
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/override-render-a.webp" data-cap="CAD render of the Override robot, front three-quarter view." aria-label="Open photo: CAD render, front" style="--ar: 1626 / 1468">
+            <img src="media/override-render-a-sm.webp" loading="lazy" decoding="async" alt="CAD render of the Override robot showing the roller intake, two towers, and the brain mounted on the side">
+          </button>
+          <figcaption><span class="fig-no">FIG 08.2</span>CAD render, front</figcaption>
+        </figure>
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/override-render-b.webp" data-cap="CAD render of the Override robot, side view." aria-label="Open photo: CAD render, side" style="--ar: 1728 / 1468">
+            <img src="media/override-render-b-sm.webp" loading="lazy" decoding="async" alt="CAD render of the Override robot from the side, showing the tower lift and omni-wheel base">
+          </button>
+          <figcaption><span class="fig-no">FIG 08.3</span>CAD render, side</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 · GO-KART -->
+  <section class="sheet" id="s09" data-domain="eng" data-title="Go-Kart" data-loc="Home shop" data-date="Personal build" data-scale="NTS" data-thumb="media/kart-bare-sm.webp" aria-roledescription="slide" aria-label="Sheet 09: Go-kart">
+    <div class="sheet-inner lay-wide">
+      <div class="sheet-text">
+        <p class="eyebrow rv">Personal build</p>
+        <h2 class="h2 rv">Go-kart</h2>
+        <p class="lede rv">I designed this kart and welded the frame myself from square steel tube, then built the rest of it onto that frame: engine mount, steering, brake, seat, and pedals.</p>
+        <dl class="facts rv">
+          <dt>Frame</dt><dd>Square steel tube, designed and welded by me</dd>
+          <dt>Engine</dt><dd>Four-stroke, mounted at the rear</dd>
+          <dt>Steering</dt><dd>Column and tie rods to the front spindles</dd>
+          <dt>Brake</dt><dd>Disc on the rear axle</dd>
+          <dt>Wheels</dt><dd>Racing slicks on aluminum rims</dd>
+          <dt>Finish</dt><dd>Red paint over bare steel</dd>
+        </dl>
+        <div class="actions rv"><button class="btn" type="button" data-wu="09">Full write-up <span class="arr" aria-hidden="true">→</span></button></div>
+      </div>
+      <div class="media media--row">
+        <figure class="fig" style="--ar: 1854 / 1413; --g: 1.312">
+          <button class="fig-open" type="button" data-src="media/kart-bare.webp" data-cap="The kart in bare steel." aria-label="Open photo: the kart in bare steel">
+            <img src="media/kart-bare.webp" width="1854" height="1413" loading="lazy" decoding="async" alt="The go-kart in bare welded steel on a driveway: bucket seat, steering wheel, rear engine with a white fuel tank, racing slicks">
+          </button>
+          <figcaption><span class="fig-no">FIG 09.1</span>Bare steel.</figcaption>
+        </figure>
+        <figure class="fig" style="--ar: 988 / 1470; --g: .672">
+          <button class="fig-open" type="button" data-src="media/kart-red.webp" data-cap="The frame painted red." aria-label="Open photo: the kart painted red">
+            <img src="media/kart-red.webp" width="988" height="1470" loading="lazy" decoding="async" alt="The go-kart frame painted red, seen from the front on a stone driveway, with tools beside it">
+          </button>
+          <figcaption><span class="fig-no">FIG 09.2</span>Painted.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · THE WORKSHOP -->
+  <section class="sheet" id="s10" data-domain="eng" data-title="The Workshop" data-loc="Home shop" data-date="2020–2026" data-scale="NTS" data-thumb="media/printer-front-sm.webp" aria-roledescription="slide" aria-label="Sheet 10: The Workshop">
+    <div class="sheet-inner lay-wide">
+      <div class="sheet-text">
+        <p class="eyebrow rv">Personal build · Six years</p>
+        <h2 class="h2 rv">The workshop</h2>
+        <p class="lede rv">I got a stock Ender 3 Pro for my 13th birthday and have been rebuilding it ever since. Almost every upgrade on it is a part I designed or printed myself. It is the tool behind nearly everything else in this portfolio: I can draw a part, print it that night, and test it the next morning.</p>
+        <dl class="facts rv">
+          <dt>Motion</dt><dd>Upgraded stepper motors and rails, kept lubricated</dd>
+          <dt>Extrusion</dt><dd>Upgraded extruder and nozzle</dd>
+          <dt>Cooling</dt><dd>Two fans with a redesigned printed duct</dd>
+          <dt>Firmware</dt><dd>My own Klipper setup, with every print tracked remotely</dd>
+        </dl>
+        <div class="actions rv"><button class="btn" type="button" data-wu="10">Full write-up <span class="arr" aria-hidden="true">→</span></button></div>
+      </div>
+      <div class="media media--side">
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/printer-full.webp" data-cap="The Ender 3 Pro, six years and dozens of modifications in." aria-label="Open photo: The full machine" style="--ar: 1500 / 2000">
+            <img src="media/printer-full-sm.webp" loading="lazy" decoding="async" alt="The modified Ender 3 Pro with a spool of white filament on a top-mounted holder">
+          </button>
+          <figcaption><span class="fig-no">FIG 10.1</span>The full machine</figcaption>
+        </figure>
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/printer-front.webp" data-cap="Toolhead: upgraded extruder, blower fan, and red printed fan duct." aria-label="Open photo: Toolhead and duct" style="--ar: 2000 / 1500">
+            <img src="media/printer-front-sm.webp" loading="lazy" decoding="async" alt="Front view of the printer toolhead with a black blower fan and a red printed fan duct">
+          </button>
+          <figcaption><span class="fig-no">FIG 10.2</span>Toolhead and duct</figcaption>
+        </figure>
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/printer-top.webp" data-cap="Toolhead from above: extruder, stepper, and cable management." aria-label="Open photo: From above" style="--ar: 2000 / 1500">
+            <img src="media/printer-top-sm.webp" loading="lazy" decoding="async" alt="Top view of the toolhead showing the extruder gears, stepper motor, and braided cable sleeves">
+          </button>
+          <figcaption><span class="fig-no">FIG 10.3</span>From above</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · MYOSENSE -->
+  <section class="sheet" id="s11" data-domain="eng" data-title="MyoSense" data-loc="Diamond Challenge" data-date="Prototype" data-scale="NTS" data-thumb="media/myosense-standing-sm.webp" aria-roledescription="slide" aria-label="Sheet 11: MyoSense">
+    <div class="sheet-inner lay-wide">
+      <div class="sheet-text">
+        <p class="eyebrow rv">Diamond Challenge · Team project</p>
+        <h2 class="h2 rv">MyoSense</h2>
+        <p class="lede rv">A wearable patch sensor that tracks strain on an athlete's muscle group during rehabilitation, built for our Diamond Challenge pitch. This is one of the early prototypes: the electronics sealed in a printed enclosure small enough to wear.</p>
+        <dl class="facts rv">
+          <dt>Use</dt><dd>Monitoring muscle strain during athletic rehab</dd>
+          <dt>Pitch</dt><dd>Diamond Challenge</dd>
+          <dt>Stage</dt><dd>Early prototype</dd>
+          <dt>Enclosure</dt><dd>3D printed, four-screw closure, raised logo</dd>
+        </dl>
+        <div class="actions rv"><button class="btn" type="button" data-wu="11">Full write-up <span class="arr" aria-hidden="true">→</span></button></div>
+      </div>
+      <div class="media media--side">
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/myosense-standing.webp" data-cap="MyoSense prototype enclosure." aria-label="Open photo: Prototype enclosure" style="--ar: 2000 / 1500">
+            <img src="media/myosense-standing-sm.webp" loading="lazy" decoding="async" alt="The white 3D printed MyoSense enclosure standing upright, with four screws and the MYOSENSE logo">
+          </button>
+          <figcaption><span class="fig-no">FIG 11.1</span>Prototype enclosure</figcaption>
+        </figure>
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/myosense-top-a.webp" data-cap="MyoSense prototype from above." aria-label="Open photo: From above" style="--ar: 1500 / 2000">
+            <img src="media/myosense-top-a-sm.webp" loading="lazy" decoding="async" alt="The MyoSense enclosure lying flat, seen from above">
+          </button>
+          <figcaption><span class="fig-no">FIG 11.2</span>From above</figcaption>
+        </figure>
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/myosense-top-b.webp" data-cap="MyoSense prototype, side ports visible." aria-label="Open photo: Side detail" style="--ar: 1500 / 2000">
+            <img src="media/myosense-top-b-sm.webp" loading="lazy" decoding="async" alt="The MyoSense enclosure from above in warm light, with openings on one side">
+          </button>
+          <figcaption><span class="fig-no">FIG 11.3</span>Side detail</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 · PROSTHETIC ARM -->
+  <section class="sheet" id="s12" data-domain="eng" data-title="Prosthetic Arm" data-loc="Home shop" data-date="Personal project" data-scale="NTS" data-thumb="media/arm-full-sm.webp" aria-roledescription="slide" aria-label="Sheet 12: Prosthetic Arm">
+    <div class="sheet-inner lay-wide">
+      <div class="sheet-text">
+        <p class="eyebrow rv">Personal project · Adaptive sports</p>
+        <h2 class="h2 rv">Prosthetic arm</h2>
+        <p class="lede rv">Most prosthetics are designed only for daily life. I wanted to build an affordable arm for mountain biking. Two air-regulated pneumatic pistons hold the pressure the elbow needs for steering and soak up shocks on rough trail, between 3D printed joints.</p>
+        <dl class="facts rv">
+          <dt>Damping</dt><dd>Two air-regulated pistons, tunable pressure</dd>
+          <dt>Grip</dt><dd>Universal claw toleranced to clip off if the arm twists too far, as in a crash</dd>
+          <dt>Socket</dt><dd>Placeholder shape; a real one would be custom-fit</dd>
+          <dt>Build</dt><dd>3D printed joints and brackets, off-the-shelf pneumatics</dd>
+        </dl>
+        <div class="actions rv"><button class="btn" type="button" data-wu="12">Full write-up <span class="arr" aria-hidden="true">→</span></button></div>
+      </div>
+      <div class="media media--hero4">
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/arm-full.webp" data-cap="The full arm: claw, printed joints, pneumatic pistons, and socket." aria-label="Open photo: The full arm" style="--ar: 2000 / 1500">
+            <img src="media/arm-full-sm.webp" loading="lazy" decoding="async" alt="The black 3D printed prosthetic arm on a desk, with a claw at one end, a pneumatic cylinder along the forearm, and a cone-shaped socket at the other end">
+          </button>
+          <figcaption><span class="fig-no">FIG 12.1</span>The full arm</figcaption>
+        </figure>
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/arm-cylinder.webp" data-cap="Twin pneumatic pistons with valve and fittings." aria-label="Open photo: Pneumatic pistons" style="--ar: 2000 / 1500">
+            <img src="media/arm-cylinder-sm.webp" loading="lazy" decoding="async" alt="Close-up of the twin steel pneumatic pistons, valve block, and air fittings mounted on printed brackets">
+          </button>
+          <figcaption><span class="fig-no">FIG 12.2</span>Pneumatic pistons</figcaption>
+        </figure>
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/arm-shoulder.webp" data-cap="Universal claw on its breakaway mount." aria-label="Open photo: Breakaway claw" style="--ar: 2000 / 1500">
+            <img src="media/arm-shoulder-sm.webp" loading="lazy" decoding="async" alt="Close-up of the printed universal claw and its joint">
+          </button>
+          <figcaption><span class="fig-no">FIG 12.3</span>Breakaway claw</figcaption>
+        </figure>
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/arm-elbow.webp" data-cap="Printed elbow joint with the pistons spanning it." aria-label="Open photo: Elbow joint" style="--ar: 2000 / 1500">
+            <img src="media/arm-elbow-sm.webp" loading="lazy" decoding="async" alt="The printed elbow joint with the pneumatic pistons running alongside">
+          </button>
+          <figcaption><span class="fig-no">FIG 12.4</span>Elbow joint</figcaption>
+        </figure>
+        <figure class="fig">
+          <button class="fig-open" type="button" data-src="media/arm-socket.webp" data-cap="Socket, shown as a placeholder for a custom fit." aria-label="Open photo: Socket" style="--ar: 2000 / 1500">
+            <img src="media/arm-socket-sm.webp" loading="lazy" decoding="async" alt="The cone-shaped printed socket at the end of the arm">
+          </button>
+          <figcaption><span class="fig-no">FIG 12.5</span>Socket</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 · OUTDOORS -->
+  <section class="sheet" id="s13" data-domain="field" data-title="Outdoors" data-loc="Adirondacks · Catskills · New Jersey" data-date="Every season" data-scale="1 : 24 000" data-thumb="media/fish-smallmouth-sm.webp" aria-roledescription="slide" aria-label="Sheet 13: Outdoors">
+    <div class="sheet-inner">
+      <div class="sheet-text">
+        <p class="eyebrow rv">Part II · Outdoors</p>
+        <h2 class="h2 rv">On the water</h2>
+        <p class="lede rv">When I'm not building, I'm outside: fishing from a kayak or a boat, wading rivers close to home, and hiking the Adirondacks and Catskills. Fishing is a lot like engineering. You read the conditions, try something, see what happens, and adjust.</p>
+        <dl class="facts rv">
+          <dt>Where</dt><dd>Adirondacks, Catskills, and rivers and ponds in New Jersey</dd>
+          <dt>Caught</dt><dd>Largemouth and smallmouth bass, chain pickerel, catfish</dd>
+          <dt>How</dt><dd>Kayak, boat, and from shore</dd>
+        </dl>
+      </div>
+      <div class="media media--album">
+        <button class="fig-open" type="button" data-src="media/fish-smallmouth.webp" data-cap="Smallmouth bass at sunset from the boat." aria-label="Open photo: Smallmouth bass at sunset from the boat."><img src="media/fish-smallmouth-sm.webp" loading="lazy" decoding="async" alt="Nathan holding a smallmouth bass on a boat under an orange sunset sky"></button>
+        <button class="fig-open" type="button" data-src="media/canada-lake.webp" data-cap="Canada Lake at sunset, from the kayak." data-meta="Sep 5, 2026 · Adirondacks" aria-label="Open photo: Canada Lake at sunset, from the kayak."><img src="media/canada-lake-sm.webp" loading="lazy" decoding="async" alt="Sunset over a lake from the bow of a kayak with a rod and net"></button>
+        <button class="fig-open" type="button" data-src="media/fish-pickerel.webp" data-cap="Chain pickerel." aria-label="Open photo: Chain pickerel."><img src="media/fish-pickerel-sm.webp" loading="lazy" decoding="async" alt="Nathan holding a chain pickerel beside a pond on a sunny day"></button>
+        <button class="fig-open" type="button" data-src="media/fish-catfish.webp" data-cap="Catfish from a river." aria-label="Open photo: Catfish from a river."><img src="media/fish-catfish-sm.webp" loading="lazy" decoding="async" alt="Nathan holding a large catfish beside a stone-walled river"></button>
+        <button class="fig-open" type="button" data-src="media/fish-lm-a.webp" data-cap="Largemouth bass." aria-label="Open photo: Largemouth bass."><img src="media/fish-lm-a-sm.webp" loading="lazy" decoding="async" alt="Nathan holding a largemouth bass under green trees"></button>
+        <button class="fig-open" type="button" data-src="media/fish-lm-b.webp" data-cap="Largemouth bass in fall." aria-label="Open photo: Largemouth bass in fall."><img src="media/fish-lm-b-sm.webp" loading="lazy" decoding="async" alt="Nathan holding a largemouth bass in front of autumn leaves"></button>
+        <button class="fig-open" type="button" data-src="media/catskills-bass.webp" data-cap="A bass at sunset in the Catskills." data-meta="Jul 3, 2026 · Catskills" aria-label="Open photo: A bass at sunset in the Catskills."><img src="media/catskills-bass-sm.webp" loading="lazy" decoding="async" alt="A bass held up against an orange sunset over a lake"></button>
+        <button class="fig-open" type="button" data-src="media/fish-lm-c.webp" data-cap="Largemouth bass over clear water." aria-label="Open photo: Largemouth bass over clear water."><img src="media/fish-lm-c-sm.webp" loading="lazy" decoding="async" alt="A largemouth bass held up over a clear, shallow lake"></button>
+        <button class="fig-open" type="button" data-src="media/log-section.webp" data-cap="Cut log with scaly Pholiota, southern Adirondacks." data-meta="Sep 5, 2026 · Adirondacks" aria-label="Open photo: Cut log with scaly Pholiota, southern Adirondacks."><img src="media/log-section-sm.webp" loading="lazy" decoding="async" alt="The cut end of a decaying log with orange mushrooms growing from the center"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 · SPECIMENS -->
+  <section class="sheet" id="s14" data-domain="field" data-title="Specimens" data-loc="43.18–43.26° N · 74.48–74.55° W" data-date="Sep 5–6, 2026" data-scale="1 : 24 000" data-thumb="media/fungi-oldman-sm.webp" aria-roledescription="slide" aria-label="Sheet 14: Specimens">
+    <div class="sheet-inner lay-tray">
+      <div class="sheet-text">
+        <p class="eyebrow rv">Field notes · Sept 5–6, 2026</p>
+        <h2 class="h2 rv">Specimens</h2>
+        <p class="lede rv">Fungi from two days on trails in the southern Adirondacks, between 483 and 612 meters. Identifications are by eye from photos.</p>
+        <p class="note rv">cf. marks a tentative identification. sp. means the genus is certain and the species is not.</p>
+        <div class="actions rv"><button class="btn" type="button" data-wu="14">Full write-up <span class="arr" aria-hidden="true">→</span></button></div>
+      </div>
+      <div class="media media--tray">
+        <article class="spec rv">
+          <button class="fig-open" type="button" data-src="media/fungi-oldman.webp" data-cap="Old Man of the Woods, Strobilomyces sp." data-meta="Sep 6, 2026 · 10:52 · 548 m · 43.26° N, 74.55° W" aria-label="Open photo: Old Man of the Woods">
+            <img src="media/fungi-oldman-sm.webp" width="675" height="900" loading="lazy" decoding="async" alt="Old Man of the Woods mushroom with a shaggy black-and-white scaly cap beside a mossy log">
+          </button>
+          <div class="spec-label"><p class="spec-no">No. 01</p><h3 class="spec-name">Old Man of the Woods</h3><p class="spec-latin">Strobilomyces sp.</p><p class="spec-data">Sep 6 · 10:52 · 548 m<br>43.26 N 74.55 W</p></div>
+        </article>
+        <article class="spec rv">
+          <button class="fig-open" type="button" data-src="media/fungi-amanita.webp" data-cap="Yellow fly agaric, Amanita muscaria var. guessowii." data-meta="Sep 5, 2026 · 14:27 · 483 m · 43.18° N, 74.50° W" aria-label="Open photo: yellow fly agaric">
+            <img src="media/fungi-amanita-sm.webp" width="675" height="900" loading="lazy" decoding="async" alt="A yellow amanita with white warts on the forest floor among grass and twigs" style="object-position: 50% 58%">
+          </button>
+          <div class="spec-label"><p class="spec-no">No. 02</p><h3 class="spec-name">Yellow fly agaric</h3><p class="spec-latin">Amanita muscaria var. guessowii</p><p class="spec-data">Sep 5 · 14:27 · 483 m<br>43.18 N 74.50 W</p></div>
+        </article>
+        <article class="spec rv">
+          <button class="fig-open" type="button" data-src="media/fungi-grisette.webp" data-cap="Tawny grisette under a spruce seedling, cf. Amanita fulva." data-meta="Sep 6, 2026 · 13:50 · 535 m · 43.25° N, 74.54° W" aria-label="Open photo: tawny grisette">
+            <img src="media/fungi-grisette-sm.webp" width="675" height="900" loading="lazy" decoding="async" alt="A tan mushroom with a grooved cap on a slender stem beneath a small spruce seedling">
+          </button>
+          <div class="spec-label"><p class="spec-no">No. 03</p><h3 class="spec-name">Tawny grisette</h3><p class="spec-latin">cf. Amanita fulva</p><p class="spec-data">Sep 6 · 13:50 · 535 m<br>43.25 N 74.54 W</p></div>
+        </article>
+        <article class="spec rv">
+          <button class="fig-open" type="button" data-src="media/fungi-pholiota.webp" data-cap="Scaly Pholiota on a decaying log, Pholiota sp." data-meta="Sep 5, 2026 · 13:49 · 612 m · 43.18° N, 74.48° W" aria-label="Open photo: scaly Pholiota">
+            <img src="media/fungi-pholiota-sm.webp" width="675" height="900" loading="lazy" decoding="async" alt="A cluster of orange mushrooms covered in spiky scales on a mossy decaying log">
+          </button>
+          <div class="spec-label"><p class="spec-no">No. 04</p><h3 class="spec-name">Scaly Pholiota</h3><p class="spec-latin">Pholiota sp.</p><p class="spec-data">Sep 5 · 13:49 · 612 m<br>43.18 N 74.48 W</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 · FILM -->
+  <section class="sheet" id="s15" data-domain="cross" data-title="Film" data-loc="6 videos · 4 clips" data-date="2024–2026" data-scale="—" data-thumb="media/clip-longgoal-poster.webp" aria-roledescription="slide" aria-label="Sheet 15: Film">
+    <div class="sheet-inner">
+      <div class="sheet-text" style="grid-column: 1 / span 4">
+        <p class="eyebrow rv">Film</p>
+        <h2 class="h2 rv">Video</h2>
+        <p class="lede rv">Match footage, recaps, and reveal videos from four seasons. The skills video is mine; the others are credited to the people who made them. YouTube links open in a new tab.</p>
+      </div>
+      <ol class="film rv">
+        <li><a class="film-row" href="https://www.youtube.com/watch?v=GKLd7nQjTAM" target="_blank" rel="noopener"><span class="n">01</span><span class="th"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z" fill="currentColor"/></svg></span><span><span class="t">7405R: 198 Official Skills (5th in the World)</span><span class="m"><span class="mine">Made by me</span> · Jan 18, 2026 · 102 driver + 96 programming</span></span><span class="k">YouTube ↗</span></a></li>
+        <li><a class="film-row" href="https://www.youtube.com/watch?v=xsADvREyhMM" target="_blank" rel="noopener"><span class="n">02</span><span class="th"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z" fill="currentColor"/></svg></span><span><span class="t">You Can Do Anything When You're Single | 7405R VEX Recap</span><span class="m">7405R teammate · Feb 16, 2026 · Valentine's Vextravaganza, tournament champions</span></span><span class="k">YouTube ↗</span></a></li>
+        <li><a class="film-row" href="https://www.youtube.com/watch?v=XCxMjzXZSGs" target="_blank" rel="noopener"><span class="n">03</span><span class="th"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z" fill="currentColor"/></svg></span><span><span class="t">How We Won the Biggest Robotics Competition in the US</span><span class="m">Yeshrooms · Apr 18, 2026 · The 2026 CREATE U.S. Open</span></span><span class="k">YouTube ↗</span></a></li>
+        <li><a class="film-row" href="https://www.youtube.com/watch?v=R23zmzfpq24" target="_blank" rel="noopener"><span class="n">04</span><span class="th"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z" fill="currentColor"/></svg></span><span><span class="t">4610C Push Back Worlds Reveal ft. 7405R</span><span class="m">4610C Bent C-Channel · Apr 19, 2026</span></span><span class="k">YouTube ↗</span></a></li>
+        <li><a class="film-row" href="https://www.youtube.com/watch?v=OvjGRyFz8NQ" target="_blank" rel="noopener"><span class="n">05</span><span class="th"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z" fill="currentColor"/></svg></span><span><span class="t">4610C x 7405R Worlds High Stakes Reveal</span><span class="m">4610C Bent C-Channel · May 6, 2025 · Opportunity Division</span></span><span class="k">YouTube ↗</span></a></li>
+        <li><a class="film-row" href="https://www.youtube.com/watch?v=rjlOwjXpNN8" target="_blank" rel="noopener"><span class="n">06</span><span class="th"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z" fill="currentColor"/></svg></span><span><span class="t">7405R 2024 VEX Robotics World Championship Teaser</span><span class="m">William Baxter · Nov 30, 2024</span></span><span class="k">YouTube ↗</span></a></li>
+        <li><button class="film-row fig-open-proxy" type="button" data-proxy="s05-0"><span class="n">07</span><span class="th"><img src="media/clip-practice-poster.webp" alt="" loading="lazy" decoding="async"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z" fill="currentColor"/></svg></span><span><span class="t">Practice cycle on a full field</span><span class="m">Push Back · 0:12</span></span><span class="k">Play</span></button></li>
+        <li><button class="film-row fig-open-proxy" type="button" data-proxy="s05-1"><span class="n">08</span><span class="th"><img src="media/clip-longgoal-poster.webp" alt="" loading="lazy" decoding="async"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z" fill="currentColor"/></svg></span><span><span class="t">Long-goal scoring test, 11:52 PM</span><span class="m">Push Back · April 2, 2026 · 0:03</span></span><span class="k">Play</span></button></li>
+        <li><button class="film-row fig-open-proxy" type="button" data-proxy="s03-0"><span class="n">09</span><span class="th"><img src="media/clip-8019-poster.webp" alt="" loading="lazy" decoding="async"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z" fill="currentColor"/></svg></span><span><span class="t">Ring scoring practice</span><span class="m">High Stakes · April 2025 · 0:15</span></span><span class="k">Play</span></button></li>
+        <li><button class="film-row fig-open-proxy" type="button" data-proxy="s03-1"><span class="n">10</span><span class="th"><img src="media/clip-8009-poster.webp" alt="" loading="lazy" decoding="async"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z" fill="currentColor"/></svg></span><span><span class="t">Stacking a mobile goal</span><span class="m">High Stakes · April 2025 · 0:15</span></span><span class="k">Play</span></button></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 16 · ABOUT -->
+  <section class="sheet" id="s16" data-domain="cross" data-title="About" data-loc="Millburn, NJ" data-date="Class of 2027" data-scale="—" data-thumb="media/fungi-grisette-sm.webp" aria-roledescription="slide" aria-label="Sheet 16: About">
+    <div class="sheet-inner">
+      <div class="sheet-text">
+        <p class="eyebrow rv">About</p>
+        <h2 class="h2 rv">Nathan Krupkin</h2>
+        <p class="lede rv"><strong>Senior at Millburn High School in New Jersey, Class of 2027.</strong> I've been on VEX team 7405R for all four of my high school seasons, where I design and build, drive, and work on the engineering notebook and strategy. On my own I build things like the go-kart, a prosthetic arm for mountain biking, and most of my own 3D printer. The rest of the time I'm in the Adirondacks or the Catskills, hiking, kayaking, fishing, and photographing what grows on the forest floor.</p>
+        <div class="links rv">
+          <a class="btn" href="https://www.instagram.com/7405r_riptide/" target="_blank" rel="noopener">Team Instagram <span class="arr" aria-hidden="true">↗</span></a>
+          <button class="btn" type="button" data-index aria-haspopup="dialog">All sheets</button>
+        </div>
+        <ul class="sources rv" aria-label="Sources">
+          <li>Results on this site come from public sources:</li>
+          <li><a href="https://mhs.millburn.org/o/mhs/article/2585489" target="_blank" rel="noopener">Millburn Township Public Schools, "Robotics Team," Dec 8, 2025</a></li>
+          <li><a href="https://www.create-found.org/documents/2026TournamentResults.pdf" target="_blank" rel="noopener">CREATE Foundation, 2026 U.S. Open results (PDF)</a></li>
+          <li><a href="https://saratogafalcon.org/?p=34185" target="_blank" rel="noopener">The Saratoga Falcon, "VEX robotics teams find success at national championship," Mar 27, 2026</a></li>
+          <li><a href="https://www.youtube.com/watch?v=GKLd7nQjTAM" target="_blank" rel="noopener">7405R, "198 Official Skills (5th in the World)," Jan 18, 2026</a></li>
+        </ul>
+      </div>
+      <div class="contact rv" role="group" aria-label="Contact sheet of every photo">
+        <button class="fig-open" type="button" data-src="media/pushback-states.webp" data-cap="Over Under robot, 2023–24."><img src="media/pushback-states-sm.webp" alt="Over Under robot from above" loading="lazy" decoding="async"><span class="cn">01</span></button>
+        <button class="fig-open" type="button" data-src="media/awards.webp" data-cap="State banners and U.S. Open plaques."><img src="media/awards-sm.webp" alt="Robot in a wizard hat with award banners and plaques" loading="lazy" decoding="async"><span class="cn">02</span></button>
+        <button class="fig-open" type="button" data-src="media/wpi-excellence.webp" data-cap="Excellence Award, Wave at WPI Signature Event, Dec 2025."><img src="media/wpi-excellence-sm.webp" alt="The team with the WPI Excellence Award banner" loading="lazy" decoding="async"><span class="cn">03</span></button>
+        <button class="fig-open" type="button" data-kind="video" data-src="media/clip-practice.mp4" data-poster="media/clip-practice-poster.webp" data-cap="Practice cycle on a full field."><img src="media/clip-practice-poster.webp" alt="Frame from the practice video" loading="lazy" decoding="async"><span class="cn">05</span></button>
+        <button class="fig-open" type="button" data-src="media/hang.webp" data-cap="Hang mechanism test."><img src="media/hang-sm.webp" alt="Robot hanging by its top hook" loading="lazy" decoding="async"><span class="cn">06</span></button>
+        <button class="fig-open" type="button" data-src="media/highstakes-goal.webp" data-cap="High Stakes robot beside a scored mobile goal."><img src="media/highstakes-goal-sm.webp" alt="High Stakes robot beside a mobile goal" loading="lazy" decoding="async"><span class="cn">07</span></button>
+        <button class="fig-open" type="button" data-src="media/highstakes-side.webp" data-cap="High Stakes robot, side view."><img src="media/highstakes-side-sm.webp" alt="High Stakes robot side view" loading="lazy" decoding="async"><span class="cn">08</span></button>
+        <button class="fig-open" type="button" data-src="media/override.webp" data-cap="Early Override build."><img src="media/override-sm.webp" alt="Early Override robot on a practice field" loading="lazy" decoding="async"><span class="cn">09</span></button>
+        <button class="fig-open" type="button" data-src="media/kart-bare.webp" data-cap="Go-kart, bare steel."><img src="media/kart-bare-sm.webp" alt="Go-kart in bare steel" loading="lazy" decoding="async"><span class="cn">10</span></button>
+        <button class="fig-open" type="button" data-src="media/kart-red.webp" data-cap="Go-kart, painted."><img src="media/kart-red-sm.webp" alt="Go-kart frame painted red" loading="lazy" decoding="async"><span class="cn">11</span></button>
+        <button class="fig-open" type="button" data-src="media/log-section.webp" data-cap="Cut log with scaly Pholiota." data-meta="Sep 5, 2026 · 13:49 · 613 m · 43.18° N, 74.48° W"><img src="media/log-section-sm.webp" alt="Cut log with orange fungi" loading="lazy" decoding="async"><span class="cn">12</span></button>
+        <button class="fig-open" type="button" data-src="media/fungi-oldman.webp" data-cap="Old Man of the Woods, Strobilomyces sp." data-meta="Sep 6, 2026 · 10:52 · 548 m · 43.26° N, 74.55° W"><img src="media/fungi-oldman-sm.webp" alt="Old Man of the Woods mushroom" loading="lazy" decoding="async"><span class="cn">13</span></button>
+        <button class="fig-open" type="button" data-src="media/fungi-amanita.webp" data-cap="Yellow fly agaric, Amanita muscaria var. guessowii." data-meta="Sep 5, 2026 · 14:27 · 483 m · 43.18° N, 74.50° W"><img src="media/fungi-amanita-sm.webp" alt="Yellow amanita on the forest floor" loading="lazy" decoding="async"><span class="cn">14</span></button>
+        <button class="fig-open" type="button" data-src="media/fungi-grisette.webp" data-cap="Tawny grisette, cf. Amanita fulva." data-meta="Sep 6, 2026 · 13:50 · 535 m · 43.25° N, 74.54° W"><img src="media/fungi-grisette-sm.webp" alt="Tan mushroom under a spruce seedling" loading="lazy" decoding="async"><span class="cn">15</span></button>
+        <button class="fig-open" type="button" data-src="media/fungi-pholiota.webp" data-cap="Scaly Pholiota, Pholiota sp." data-meta="Sep 5, 2026 · 13:49 · 612 m · 43.18° N, 74.48° W"><img src="media/fungi-pholiota-sm.webp" alt="Orange scaly mushrooms on a log" loading="lazy" decoding="async"><span class="cn">16</span></button>
+        <button class="fig-open" type="button" data-src="media/canada-lake.webp" data-cap="Canada Lake at sunset." data-meta="Sep 5, 2026 · 19:20 · 471 m · 43.17° N, 74.51° W"><img src="media/canada-lake-sm.webp" alt="Sunset over Canada Lake from a kayak" loading="lazy" decoding="async"><span class="cn">17</span></button>
+        <button class="fig-open" type="button" data-src="media/catskills-bass.webp" data-cap="A bass at sunset." data-meta="Jul 3, 2026 · 20:39 · 181 m · 42.00° N, 74.14° W"><img src="media/catskills-bass-sm.webp" alt="A bass held up at sunset" loading="lazy" decoding="async"><span class="cn">18</span></button>
+        <button class="fig-open" type="button" data-src="media/overunder-states.webp" data-cap="Over Under, NJ State Champion and Design Award."><img src="media/overunder-states-sm.webp" alt="Over Under, NJ State Champion and Design Award." loading="lazy" decoding="async"><span class="cn">19</span></button>
+        <button class="fig-open" type="button" data-src="media/overunder-climb.webp" data-cap="Over Under elevation climb."><img src="media/overunder-climb-sm.webp" alt="Over Under elevation climb." loading="lazy" decoding="async"><span class="cn">20</span></button>
+        <button class="fig-open" type="button" data-src="media/highstakes-field.webp" data-cap="High Stakes, mobile goal at NJIT."><img src="media/highstakes-field-sm.webp" alt="High Stakes, mobile goal at NJIT." loading="lazy" decoding="async"><span class="cn">21</span></button>
+        <button class="fig-open" type="button" data-src="media/highstakes-states.webp" data-cap="High Stakes, NJ State Champion."><img src="media/highstakes-states-sm.webp" alt="High Stakes, NJ State Champion." loading="lazy" decoding="async"><span class="cn">22</span></button>
+        <button class="fig-open" type="button" data-src="media/highstakes-wpi.webp" data-cap="High Stakes, WPI Excellence Award."><img src="media/highstakes-wpi-sm.webp" alt="High Stakes, WPI Excellence Award." loading="lazy" decoding="async"><span class="cn">23</span></button>
+        <button class="fig-open" type="button" data-src="media/pushback-cad.webp" data-cap="Push Back CAD."><img src="media/pushback-cad-sm.webp" alt="Push Back CAD." loading="lazy" decoding="async"><span class="cn">24</span></button>
+        <button class="fig-open" type="button" data-src="media/pushback-wpi.webp" data-cap="Push Back, WPI trophies."><img src="media/pushback-wpi-sm.webp" alt="Push Back, WPI trophies." loading="lazy" decoding="async"><span class="cn">25</span></button>
+        <button class="fig-open" type="button" data-src="media/pushback-skills.webp" data-cap="Push Back, Skills Champion and Excellence."><img src="media/pushback-skills-sm.webp" alt="Push Back, Skills Champion and Excellence." loading="lazy" decoding="async"><span class="cn">26</span></button>
+        <button class="fig-open" type="button" data-src="media/worlds26.webp" data-cap="Worlds 2026, Innovate Award and Division Finalist."><img src="media/worlds26-sm.webp" alt="Worlds 2026, Innovate Award and Division Finalist." loading="lazy" decoding="async"><span class="cn">27</span></button>
+        <button class="fig-open" type="button" data-src="media/override-render-a.webp" data-cap="Override CAD render."><img src="media/override-render-a-sm.webp" alt="Override CAD render." loading="lazy" decoding="async"><span class="cn">28</span></button>
+        <button class="fig-open" type="button" data-src="media/override-render-b.webp" data-cap="Override CAD render, side."><img src="media/override-render-b-sm.webp" alt="Override CAD render, side." loading="lazy" decoding="async"><span class="cn">29</span></button>
+        <button class="fig-open" type="button" data-src="media/printer-full.webp" data-cap="Ender 3 Pro."><img src="media/printer-full-sm.webp" alt="Ender 3 Pro." loading="lazy" decoding="async"><span class="cn">30</span></button>
+        <button class="fig-open" type="button" data-src="media/printer-front.webp" data-cap="Printer toolhead."><img src="media/printer-front-sm.webp" alt="Printer toolhead." loading="lazy" decoding="async"><span class="cn">31</span></button>
+        <button class="fig-open" type="button" data-src="media/myosense-standing.webp" data-cap="MyoSense prototype."><img src="media/myosense-standing-sm.webp" alt="MyoSense prototype." loading="lazy" decoding="async"><span class="cn">32</span></button>
+        <button class="fig-open" type="button" data-src="media/arm-full.webp" data-cap="Prosthetic arm."><img src="media/arm-full-sm.webp" alt="Prosthetic arm." loading="lazy" decoding="async"><span class="cn">33</span></button>
+        <button class="fig-open" type="button" data-src="media/arm-cylinder.webp" data-cap="Arm pneumatic pistons."><img src="media/arm-cylinder-sm.webp" alt="Arm pneumatic pistons." loading="lazy" decoding="async"><span class="cn">34</span></button>
+        <button class="fig-open" type="button" data-src="media/arm-shoulder.webp" data-cap="Breakaway claw."><img src="media/arm-shoulder-sm.webp" alt="Breakaway claw." loading="lazy" decoding="async"><span class="cn">35</span></button>
+        <button class="fig-open" type="button" data-src="media/arm-overhead.webp" data-cap="Prosthetic arm from above."><img src="media/arm-overhead-sm.webp" alt="Prosthetic arm from above." loading="lazy" decoding="async"><span class="cn">36</span></button>
+        <button class="fig-open" type="button" data-src="media/fish-smallmouth.webp" data-cap="Smallmouth bass."><img src="media/fish-smallmouth-sm.webp" alt="Smallmouth bass." loading="lazy" decoding="async"><span class="cn">37</span></button>
+        <button class="fig-open" type="button" data-src="media/fish-pickerel.webp" data-cap="Chain pickerel."><img src="media/fish-pickerel-sm.webp" alt="Chain pickerel." loading="lazy" decoding="async"><span class="cn">38</span></button>
+        <button class="fig-open" type="button" data-src="media/fish-catfish.webp" data-cap="Catfish."><img src="media/fish-catfish-sm.webp" alt="Catfish." loading="lazy" decoding="async"><span class="cn">39</span></button>
+        <button class="fig-open" type="button" data-src="media/fish-lm-b.webp" data-cap="Largemouth bass."><img src="media/fish-lm-b-sm.webp" alt="Largemouth bass." loading="lazy" decoding="async"><span class="cn">40</span></button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="tb" aria-label="Title block">
+  <div class="tb-grid">
+    <div class="tb-cell tb-sheet"><span class="tb-k">Sheet</span><span class="tb-v" data-tb="sheet" aria-hidden="true">00 / 16</span></div>
+    <div class="tb-cell tb-title"><span class="tb-k">Title</span><span class="tb-v" data-tb="title" aria-hidden="true">Cross Section</span></div>
+    <div class="tb-cell tb-domain"><span class="tb-k">Discipline</span><span class="tb-v" data-tb="domain" aria-hidden="true">Cross section</span></div>
+    <div class="tb-cell tb-loc"><span class="tb-k">Location</span><span class="tb-v" data-tb="loc" aria-hidden="true">Millburn, NJ</span></div>
+    <div class="tb-cell tb-date"><span class="tb-k">Date</span><span class="tb-v" data-tb="date" aria-hidden="true">2023–2027</span></div>
+    <div class="tb-cell tb-scale"><span class="tb-k">Scale</span><span class="tb-v" data-tb="scale" aria-hidden="true">—</span></div>
+    <div class="tb-cell tb-nav">
+      <button class="nav-btn" type="button" id="prev" aria-label="Previous sheet"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button>
+      <button class="nav-btn" type="button" id="next" aria-label="Next sheet"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button>
+    </div>
+  </div>
+</footer>
+
+<p class="sr-only" id="live" aria-live="polite"></p>
+
+<!-- write-up drawer -->
+<dialog class="wu" id="wu" aria-labelledby="wu-title">
+  <div class="wu-head">
+    <div><p class="wu-no" id="wu-no"></p><h2 class="wu-title" id="wu-title"></h2></div>
+    <button class="x-btn" type="button" data-close aria-label="Close write-up"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1 1 13" stroke="currentColor" stroke-width="1.4"/></svg></button>
+  </div>
+  <div class="wu-body" id="wu-body"></div>
+</dialog>
+
+<!-- lightbox -->
+<dialog class="lb" id="lb" aria-label="Photo viewer">
+  <div class="lb-wrap">
+    <div class="lb-media" id="lb-media"></div>
+    <div class="lb-cap"><span><span class="lb-num" id="lb-num"></span>&nbsp;&nbsp;<b id="lb-cap"></b></span><span id="lb-meta"></span></div>
+  </div>
+  <button class="lb-step lb-prev" type="button" id="lb-prev" aria-label="Previous photo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button>
+  <button class="lb-step lb-next" type="button" id="lb-next" aria-label="Next photo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button>
+  <button class="x-btn" type="button" data-close aria-label="Close viewer"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1 1 13" stroke="currentColor" stroke-width="1.4"/></svg></button>
+</dialog>
+
+<!-- index -->
+<dialog class="ix" id="ix" aria-labelledby="ix-h">
+  <div class="ix-wrap">
+    <div class="ix-head"><h2 id="ix-h">Index · 17 sheets</h2><button class="x-btn" type="button" data-close aria-label="Close index"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1 1 13" stroke="currentColor" stroke-width="1.4"/></svg></button></div>
+    <div class="ix-grid" id="ix-grid"></div>
+  </div>
+</dialog>
+
+<!-- ===================== write-ups ===================== -->
+<template id="wu-01" data-title="7405R Riptide">
+  <h3>How VEX works</h3>
+  <p>Every spring, VEX releases a new game for the V5 Robotics Competition, and teams spend the next year designing, building, and programming a robot to play it. The robot has to fit inside an 18-inch cube at the start of each match.</p>
+  <p>Matches are played two against two on a 12-by-12-foot field: a 15-second autonomous period run entirely by code, then 1 minute 45 seconds of driver control. Teams also run <strong>robot skills</strong>, where one robot plays alone for a minute, once driven and once fully autonomous, and the two scores are added together.</p>
+  <p>Judged awards like <strong>Design</strong> and <strong>Excellence</strong> look at the engineering notebook, an interview with the team, and how the robot performs.</p>
+  <h3>What I do</h3>
+  <p><strong>Design and build.</strong> I design and build mechanisms and work on the robot as a whole, and keep rebuilding as the season changes what the robot needs.</p>
+  <p><strong>Driving.</strong> I drive in matches.</p>
+  <p><strong>Notebook and strategy.</strong> I work on the engineering notebook, the record of our design decisions that judges read, and on match strategy.</p>
+  <h3>Four seasons</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Season</th><th>Game</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>2023–24</td><td><strong>Over Under</strong></td><td>New Jersey State Champion and Design Award; World Championship, Dallas: division semifinals</td></tr>
+      <tr><td>2024–25</td><td><strong>High Stakes</strong></td><td>Excellence Award, Wave at WPI Signature Event; New Jersey State Champion; World Championship, Dallas: Opportunity Division finals</td></tr>
+      <tr><td>2025–26</td><td><strong>Push Back</strong></td><td>Excellence Award at the Wave at WPI Signature Event and at the CREATE U.S. Open; New Jersey State Champion and Design Award; 198 official skills, 5th in the world; World Championship, St. Louis: Innovate Award and Division Finalist</td></tr>
+      <tr><td>2026–27</td><td><strong>Override</strong></td><td>In progress</td></tr>
+    </tbody>
+  </table></div>
+</template>
+
+<template id="wu-02" data-title="Over Under">
+  <h3>The game</h3>
+  <p>Over Under was the 2023–24 game. Robots push triballs into their alliance's goal and over a barrier that splits the field, and at the end of the match they climb an elevation bar. The higher a robot climbs, the more it scores.</p>
+  <h3>Results</h3>
+  <p><strong>New Jersey State Championship:</strong> Tournament Champion and Design Award.</p>
+  <p><strong>VEX Robotics World Championship, Dallas, April 25–27, 2024:</strong> division semifinals.</p>
+  <h3>My role</h3>
+  <p>My freshman season on the team: design and build, driving, and the engineering notebook and strategy.</p>
+  <ul class="wu-links"><li><a href="https://www.youtube.com/watch?v=rjlOwjXpNN8" target="_blank" rel="noopener">7405R 2024 World Championship teaser (William Baxter) <span>YouTube ↗</span></a></li></ul>
+</template>
+
+<template id="wu-03" data-title="High Stakes">
+  <h3>The game</h3>
+  <p>High Stakes was the 2024–25 game. Robots score rings onto stakes, including mobile goals they can pick up and carry into the corners, and climb a ladder in the middle of the field to finish.</p>
+  <h3>Results</h3>
+  <p><strong>Wave at WPI Signature Event:</strong> Excellence Award.</p>
+  <p><strong>New Jersey State Championship:</strong> Tournament Champion, our second state title in a row.</p>
+  <p><strong>VEX Robotics World Championship, Dallas, 2025:</strong> Opportunity Division finals.</p>
+  <ul class="wu-links"><li><a href="https://www.youtube.com/watch?v=OvjGRyFz8NQ" target="_blank" rel="noopener">4610C x 7405R Worlds High Stakes reveal <span>YouTube ↗</span></a></li></ul>
+</template>
+
+<template id="wu-05" data-title="Push Back: the machine">
+  <h3>The game</h3>
+  <p>Push Back is played on a 12-by-12-foot field with 88 blocks. There are two long goals and two center goals, one upper and one lower. Each block in a goal is worth 3 points. On top of that, an alliance earns 10 points for each zone of a long goal it controls, 8 for controlling the upper center goal, and 6 for the lower one.</p>
+  <p>At the end of the match, parking in your alliance's park zone is worth 8 points for one robot or 30 for both. The alliance that scores more during the 15-second autonomous period gets a 10-point bonus.</p>
+  <h3>Our robot</h3>
+  <p>The robot routes blocks along curved polycarbonate guides up to scoring height; you can see those guides on the robot in the awards photo on sheet 06, and in the CAD model on this sheet.</p>
+  <p>The two clips on this sheet show a long-goal scoring test at home late on April 2, 2026, and a practice cycle on a full field.</p>
+  <h3>My role</h3>
+  <p>Design and build, driving, and the engineering notebook and match strategy.</p>
+</template>
+
+<template id="wu-04" data-title="Push Back: the season">
+  <h3>Results</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Date</th><th>Event</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>Dec 2025</td><td>Wave at WPI Signature Event, Worcester, MA (80 teams)</td><td><strong>Excellence Award</strong>, Finalist</td></tr>
+      <tr><td>Dec 2025</td><td>Millburn VEX Tournament (63 teams)</td><td><strong>Tournament Champion</strong></td></tr>
+      <tr><td>Jan 18, 2026</td><td>Official robot skills</td><td><strong>198</strong> (102 driver, 96 programming), 5th in the world</td></tr>
+      <tr><td>Feb 2026</td><td>Valentine's Vextravaganza</td><td><strong>Tournament Champion</strong></td></tr>
+      <tr><td>Mar 13–14, 2026</td><td>New Jersey State Championship, NJIT, Newark</td><td><strong>Tournament Champion</strong>, <strong>Design Award</strong></td></tr>
+      <tr><td>Mar 16–18, 2026</td><td>CREATE U.S. Open, Council Bluffs, IA</td><td><strong>Excellence Award</strong> (Domestic), Skills 3rd, Division Finalist</td></tr>
+      <tr><td>Apr 21–24, 2026</td><td>VEX Robotics World Championship, St. Louis</td><td><strong>Innovate Award</strong>, Division Finalist</td></tr>
+    </tbody>
+  </table></div>
+  <h3>How it went</h3>
+  <p>The Excellence Award at the Wave at WPI Signature Event in December qualified us for the World Championship. In January our official skills score of 198 was 5th in the world. In March we won the New Jersey State Championship and its Design Award at NJIT, then won Excellence again at the CREATE U.S. Open in Iowa a few days later. At the World Championship in April we won the Innovate Award and finished as Division Finalists.</p>
+  <h3>Sources</h3>
+  <ul class="wu-links">
+    <li><a href="https://mhs.millburn.org/o/mhs/article/2585489" target="_blank" rel="noopener">Millburn Township Public Schools: Robotics Team <span>Dec 8, 2025 ↗</span></a></li>
+    <li><a href="https://www.create-found.org/documents/2026TournamentResults.pdf" target="_blank" rel="noopener">CREATE Foundation: 2026 U.S. Open results <span>PDF ↗</span></a></li>
+    <li><a href="https://www.youtube.com/watch?v=GKLd7nQjTAM" target="_blank" rel="noopener">198 Official Skills (5th in the World) <span>YouTube ↗</span></a></li>
+  </ul>
+</template>
+
+<template id="wu-06" data-title="Excellence at the U.S. Open">
+  <h3>What the award is</h3>
+  <p>The Excellence Award is the highest award at a VEX event. To be considered, a team has to rank near the top in qualification matches and in robot skills, and the judges weigh its engineering notebook and its interview. The CREATE U.S. Open gives one to a domestic team and one to an international team. We won the domestic award.</p>
+  <h3>The weekend</h3>
+  <p>We finished 3rd in robot skills. In eliminations we captained the No. 3 seed alliance, with 95071Y from Saratoga, California. The alliance won its first three elimination matches, then won a division final match 70–14 on the field before a referee call against the alliance overturned it. Both teams appealed, the call stood, and we left with the Division Finalist award along with Excellence.</p>
+  <p>Two days before the U.S. Open started, we had won the New Jersey State Championship and its Design Award.</p>
+  <h3>My part</h3>
+  <p>Building, driving, and the engineering notebook the judges read.</p>
+  <h3>Sources</h3>
+  <ul class="wu-links">
+    <li><a href="https://www.create-found.org/documents/2026TournamentResults.pdf" target="_blank" rel="noopener">CREATE Foundation: 2026 tournament results <span>PDF ↗</span></a></li>
+    <li><a href="https://saratogafalcon.org/?p=34185" target="_blank" rel="noopener">The Saratoga Falcon: VEX teams at the national championship <span>Mar 27, 2026 ↗</span></a></li>
+    <li><a href="https://www.youtube.com/watch?v=XCxMjzXZSGs" target="_blank" rel="noopener">How We Won the Biggest Robotics Competition in the US (Yeshrooms) <span>YouTube ↗</span></a></li>
+  </ul>
+</template>
+
+<template id="wu-07" data-title="Worlds 2026">
+  <h3>The Innovate Award</h3>
+  <p>The Innovate Award goes to a team whose robot shows a creative, well-engineered solution to a design problem in the game, documented in the team's engineering notebook. We won it at the 2026 VEX Robotics World Championship in St. Louis, April 21–24.</p>
+  <h3>Eliminations</h3>
+  <p>We reached the division finals for the second year in a row and left with the Division Finalist trophy.</p>
+  <h3>Three straight Worlds</h3>
+  <p>2024 in Dallas: division semifinals. 2025 in Dallas: Opportunity Division finals. 2026 in St. Louis: Innovate Award and division finals.</p>
+  <ul class="wu-links"><li><a href="https://www.youtube.com/watch?v=R23zmzfpq24" target="_blank" rel="noopener">4610C Push Back Worlds Reveal ft. 7405R <span>YouTube ↗</span></a></li></ul>
+</template>
+
+<template id="wu-08" data-title="Override">
+  <h3>The game</h3>
+  <p>Override is the 2026–27 VEX V5 Robotics Competition game. Its game objects include pins and cups, and both are on the field in the photo.</p>
+  <h3>The robot so far</h3>
+  <p>The photo shows an early version of our robot, and the two renders show its CAD model: a compact base on omni wheels, two tall towers carrying a chain-driven lift, and a roller intake at the front. The brain is mounted on the side of the robot. This sheet will change as the season goes.</p>
+  <h3>My role</h3>
+  <p>Design and build, driving, and the engineering notebook and strategy, in my fourth season on the team.</p>
+</template>
+
+<template id="wu-09" data-title="Go-kart">
+  <h3>The build</h3>
+  <p>I designed this kart and welded the frame myself from square steel tube. Then I built everything else onto it: the engine mount, the steering column and tie rods, the brake, the seat, and the pedals.</p>
+  <h3>Specifications</h3>
+  <div class="tbl"><table>
+    <tbody>
+      <tr><td>Frame</td><td>Square steel tube, designed and welded by me</td></tr>
+      <tr><td>Engine</td><td>Four-stroke, rear-mounted, with a separate fuel tank</td></tr>
+      <tr><td>Steering</td><td>Steering column with tie rods to the front spindles</td></tr>
+      <tr><td>Brake</td><td>Disc brake on the rear axle</td></tr>
+      <tr><td>Wheels</td><td>Racing slicks on aluminum rims</td></tr>
+      <tr><td>Finish</td><td>Red paint over bare steel</td></tr>
+    </tbody>
+  </table></div>
+</template>
+
+<template id="wu-10" data-title="The workshop">
+  <h3>Where it started</h3>
+  <p>I got a stock Ender 3 Pro for my 13th birthday. Over the six years since, I have modified almost every part of it, and most of the replacement parts were designed and printed on the machine itself to keep costs down.</p>
+  <h3>Upgrades</h3>
+  <div class="tbl"><table><tbody>
+    <tr><td>Motors</td><td>Upgraded stepper motors</td></tr>
+    <tr><td>Extrusion</td><td>Upgraded extruder and nozzle</td></tr>
+    <tr><td>Cooling</td><td>Two fans and a redesigned printed duct for better airflow</td></tr>
+    <tr><td>Motion</td><td>Upgraded rails, kept lubricated</td></tr>
+    <tr><td>Firmware</td><td>My own Klipper configuration, with prints monitored and tracked online</td></tr>
+  </tbody></table></div>
+  <h3>Why it matters</h3>
+  <p>School has printers, but this one is mine. It is where I go from a quick design to a physical prototype the same day, and it printed the parts for the MyoSense enclosure, the prosthetic arm, and many other projects.</p>
+</template>
+
+<template id="wu-11" data-title="MyoSense">
+  <h3>The idea</h3>
+  <p>MyoSense is a wearable patch sensor that tracks strain on a muscle group, so athletes and trainers can monitor how hard a muscle is working during rehabilitation. It was our team's product for the Diamond Challenge pitch competition.</p>
+  <h3>The prototype</h3>
+  <p>The photos show one of the early prototypes: the electronics sealed inside a compact 3D printed enclosure with a four-screw closure and a raised MYOSENSE logo.</p>
+</template>
+
+<template id="wu-12" data-title="Prosthetic arm">
+  <h3>The problem</h3>
+  <p>The prosthetic market mostly targets day-to-day life. Riders who want to mountain bike need an arm that can steer, hold on, and take hits from the trail, and those are expensive or don't exist. I set out to build an affordable one.</p>
+  <h3>How it works</h3>
+  <p><strong>Pneumatic damping.</strong> Two air-regulated pistons span the elbow. Setting the air pressure tunes how stiff the arm is for steering and how much shock it absorbs on rough terrain.</p>
+  <p><strong>Breakaway claw.</strong> The universal claw is printed to a tolerance that holds during riding but clips off when the arm is twisted past a safe angle, in a crash or fall, so the force doesn't go into the rider's body.</p>
+  <p><strong>Socket.</strong> The cone shown is a placeholder for where the residual limb would sit. A real socket would be custom-fit to each rider.</p>
+  <h3>Build</h3>
+  <p>The joints, brackets, and socket are 3D printed on my own printer, with off-the-shelf pneumatic cylinders, valves, and fittings. This was a passion project.</p>
+</template>
+
+<template id="wu-14" data-title="Specimens">
+  <p>Found on September 5 and 6, 2026, between 483 and 612 meters in the southern Adirondacks. Identifications are by eye from photos. <strong>cf.</strong> means "compare with" and marks a tentative ID; <strong>sp.</strong> means the genus is known and the species is not.</p>
+  <h3>No. 01 · Old Man of the Woods</h3>
+  <p><strong>Strobilomyces sp.</strong> A shaggy gray-and-black cap that looks like a pinecone from above. It's a bolete, so it has pores instead of gills.</p>
+  <h3>No. 02 · Yellow fly agaric</h3>
+  <p><strong>Amanita muscaria var. guessowii.</strong> The eastern North American form of the fly agaric: a yellow cap with white warts. Poisonous.</p>
+  <h3>No. 03 · Tawny grisette</h3>
+  <p><strong>cf. Amanita fulva.</strong> A slender amanita with an orange-brown cap and a grooved margin, growing beside a spruce seedling.</p>
+  <h3>No. 04 · Scaly Pholiota</h3>
+  <p><strong>Pholiota sp.</strong> Clustered caps covered in upturned scales, on the same decaying log shown on sheet 13.</p>
+</template>
+
+<!-- ===================== script ===================== -->
+<script>
+(() => {
+  "use strict";
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const ANGLE_DEG = 8, TAN = Math.tan(ANGLE_DEG * Math.PI / 180);
+  const LETTERS = "ABCDEFGHJKLMNPRSTUVWXYZ"; // drafting convention skips I, O, Q
+  const DOMAIN = { eng: "Engineering", field: "Field", cross: "Cross section" };
+  const sheets = $$(".sheet");
+  const N = sheets.length;
+  const LAST = N - 1;
+  let cur = 0, busy = false;
+
+  const pad = n => String(n).padStart(2, "0");
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const easeIO = p => p < .5 ? 8 * p * p * p * p : 1 - Math.pow(-2 * p + 2, 4) / 2;
+  const easeIO3 = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+  const letter = i => LETTERS[i % LETTERS.length];
+  const r1 = v => Math.round(v * 10) / 10;
+  const setA = (el, o) => { for (const k in o) el.setAttribute(k, typeof o[k] === "number" ? r1(o[k]) : o[k]); };
+  const debounce = (fn, ms) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
+  const mobile = () => innerWidth < 900;
+
+  /* ---------- 3D simplex noise ---------- */
+  const noise3 = (() => {
+    const grad = new Float32Array([1,1,0,-1,1,0,1,-1,0,-1,-1,0,1,0,1,-1,0,1,1,0,-1,-1,0,-1,0,1,1,0,-1,1,0,1,-1,0,-1,-1]);
+    const p = new Uint8Array(256);
+    let seed = 7405;
+    const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    for (let i = 0; i < 256; i++) p[i] = i;
+    for (let i = 255; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); const t = p[i]; p[i] = p[j]; p[j] = t; }
+    const perm = new Uint8Array(512), pm12 = new Uint8Array(512);
+    for (let i = 0; i < 512; i++) { perm[i] = p[i & 255]; pm12[i] = perm[i] % 12; }
+    const F3 = 1 / 3, G3 = 1 / 6;
+    return (x, y, z) => {
+      const s = (x + y + z) * F3;
+      const i = Math.floor(x + s), j = Math.floor(y + s), k = Math.floor(z + s);
+      const t = (i + j + k) * G3;
+      const x0 = x - (i - t), y0 = y - (j - t), z0 = z - (k - t);
+      let i1, j1, k1, i2, j2, k2;
+      if (x0 >= y0) {
+        if (y0 >= z0) { i1 = 1; j1 = 0; k1 = 0; i2 = 1; j2 = 1; k2 = 0; }
+        else if (x0 >= z0) { i1 = 1; j1 = 0; k1 = 0; i2 = 1; j2 = 0; k2 = 1; }
+        else { i1 = 0; j1 = 0; k1 = 1; i2 = 1; j2 = 0; k2 = 1; }
+      } else {
+        if (y0 < z0) { i1 = 0; j1 = 0; k1 = 1; i2 = 0; j2 = 1; k2 = 1; }
+        else if (x0 < z0) { i1 = 0; j1 = 1; k1 = 0; i2 = 0; j2 = 1; k2 = 1; }
+        else { i1 = 0; j1 = 1; k1 = 0; i2 = 1; j2 = 1; k2 = 0; }
+      }
+      const x1 = x0 - i1 + G3, y1 = y0 - j1 + G3, z1 = z0 - k1 + G3;
+      const x2 = x0 - i2 + 2 * G3, y2 = y0 - j2 + 2 * G3, z2 = z0 - k2 + 2 * G3;
+      const x3 = x0 - 1 + 3 * G3, y3 = y0 - 1 + 3 * G3, z3 = z0 - 1 + 3 * G3;
+      const ii = i & 255, jj = j & 255, kk = k & 255;
+      let n = 0, tt, g;
+      tt = .6 - x0 * x0 - y0 * y0 - z0 * z0;
+      if (tt > 0) { g = pm12[ii + perm[jj + perm[kk]]] * 3; tt *= tt; n += tt * tt * (grad[g] * x0 + grad[g + 1] * y0 + grad[g + 2] * z0); }
+      tt = .6 - x1 * x1 - y1 * y1 - z1 * z1;
+      if (tt > 0) { g = pm12[ii + i1 + perm[jj + j1 + perm[kk + k1]]] * 3; tt *= tt; n += tt * tt * (grad[g] * x1 + grad[g + 1] * y1 + grad[g + 2] * z1); }
+      tt = .6 - x2 * x2 - y2 * y2 - z2 * z2;
+      if (tt > 0) { g = pm12[ii + i2 + perm[jj + j2 + perm[kk + k2]]] * 3; tt *= tt; n += tt * tt * (grad[g] * x2 + grad[g + 1] * y2 + grad[g + 2] * z2); }
+      tt = .6 - x3 * x3 - y3 * y3 - z3 * z3;
+      if (tt > 0) { g = pm12[ii + 1 + perm[jj + 1 + perm[kk + 1]]] * 3; tt *= tt; n += tt * tt * (grad[g] * x3 + grad[g + 1] * y3 + grad[g + 2] * z3); }
+      return 32 * n;
+    };
+  })();
+
+  /* ---------- background field: contours + drafting grid ---------- */
+  const terrain = (() => {
+    const cv = $("#terrain"), ctx = cv.getContext("2d");
+    const COL = { eng: "143,181,255", field: "225,170,95", cross: "214,208,195" };
+    const CELL = 18, STEP = .085, BASE = -1.7;
+    let W = 0, H = 0, dpr = 1, nx = 0, ny = 0, vals = null, gMinor = null, gMajor = null;
+    let z = 2.3, style = "cross", next = null, clipA = null, clipB = null, fast = false, paused = false, last = 0;
+
+    function resize() {
+      W = innerWidth; H = innerHeight; dpr = Math.min(2, devicePixelRatio || 1);
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      nx = Math.ceil(W / CELL) + 2; ny = Math.ceil(H / CELL) + 2;
+      vals = new Float32Array(nx * ny);
+      gMinor = new Path2D(); gMajor = new Path2D();
+      for (let x = 0, n = 0; x <= W; x += 24, n++) { const p = n % 5 === 0 ? gMajor : gMinor; p.moveTo(x + .5, 0); p.lineTo(x + .5, H); }
+      for (let y = 0, n = 0; y <= H; y += 24, n++) { const p = n % 5 === 0 ? gMajor : gMinor; p.moveTo(0, y + .5); p.lineTo(W, y + .5); }
+      draw();
+    }
+    function sample() {
+      for (let j = 0; j < ny; j++) {
+        for (let i = 0; i < nx; i++) {
+          const x = i * CELL, y = j * CELL;
+          vals[j * nx + i] = noise3(x / 640, y / 640, z) + .45 * noise3(x / 260 + 31.7, y / 260 - 12.3, z * 1.3);
+        }
+      }
+    }
+    function build() {
+      const minor = new Path2D(), major = new Path2D();
+      for (let j = 0; j < ny - 1; j++) {
+        const y = j * CELL;
+        for (let i = 0; i < nx - 1; i++) {
+          const o = j * nx + i;
+          const a = vals[o], b = vals[o + 1], c = vals[o + nx + 1], d = vals[o + nx];
+          const lo = Math.min(a, b, c, d), hi = Math.max(a, b, c, d);
+          const k0 = Math.ceil((lo - BASE) / STEP), k1 = Math.floor((hi - BASE) / STEP);
+          if (k1 < k0) continue;
+          const x = i * CELL;
+          for (let k = k0; k <= k1; k++) {
+            const L = BASE + k * STEP;
+            const idx = (a > L ? 8 : 0) | (b > L ? 4 : 0) | (c > L ? 2 : 0) | (d > L ? 1 : 0);
+            if (idx === 0 || idx === 15) continue;
+            const p = k % 5 === 0 ? major : minor;
+            switch (idx) {
+              case 1: case 14: p.moveTo(x, y + CELL * (L - a) / (d - a)); p.lineTo(x + CELL * (L - d) / (c - d), y + CELL); break;
+              case 2: case 13: p.moveTo(x + CELL * (L - d) / (c - d), y + CELL); p.lineTo(x + CELL, y + CELL * (L - b) / (c - b)); break;
+              case 3: case 12: p.moveTo(x, y + CELL * (L - a) / (d - a)); p.lineTo(x + CELL, y + CELL * (L - b) / (c - b)); break;
+              case 4: case 11: p.moveTo(x + CELL * (L - a) / (b - a), y); p.lineTo(x + CELL, y + CELL * (L - b) / (c - b)); break;
+              case 6: case 9: p.moveTo(x + CELL * (L - a) / (b - a), y); p.lineTo(x + CELL * (L - d) / (c - d), y + CELL); break;
+              case 7: case 8: p.moveTo(x, y + CELL * (L - a) / (d - a)); p.lineTo(x + CELL * (L - a) / (b - a), y); break;
+              case 5:
+                p.moveTo(x, y + CELL * (L - a) / (d - a)); p.lineTo(x + CELL * (L - a) / (b - a), y);
+                p.moveTo(x + CELL * (L - d) / (c - d), y + CELL); p.lineTo(x + CELL, y + CELL * (L - b) / (c - b)); break;
+              case 10:
+                p.moveTo(x + CELL * (L - a) / (b - a), y); p.lineTo(x + CELL, y + CELL * (L - b) / (c - b));
+                p.moveTo(x, y + CELL * (L - a) / (d - a)); p.lineTo(x + CELL * (L - d) / (c - d), y + CELL); break;
+            }
+          }
+        }
+      }
+      return { minor, major };
+    }
+    function paint(st, P) {
+      const c = COL[st] || COL.cross;
+      ctx.lineWidth = 1;
+      if (st === "eng") {
+        ctx.strokeStyle = `rgba(${c},.045)`; ctx.stroke(gMinor);
+        ctx.strokeStyle = `rgba(${c},.1)`; ctx.stroke(gMajor);
+        ctx.strokeStyle = `rgba(${c},.045)`; ctx.stroke(P.minor);
+        ctx.strokeStyle = `rgba(${c},.085)`; ctx.stroke(P.major);
+      } else if (st === "field") {
+        ctx.strokeStyle = `rgba(${c},.11)`; ctx.stroke(P.minor);
+        ctx.lineWidth = 1.3; ctx.strokeStyle = `rgba(${c},.24)`; ctx.stroke(P.major);
+      } else {
+        ctx.strokeStyle = `rgba(${c},.03)`; ctx.stroke(gMajor);
+        ctx.strokeStyle = `rgba(${c},.065)`; ctx.stroke(P.minor);
+        ctx.strokeStyle = `rgba(${c},.13)`; ctx.stroke(P.major);
+      }
+    }
+    function clipTo(pts) {
+      ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]);
+      for (let k = 1; k < pts.length; k++) ctx.lineTo(pts[k][0], pts[k][1]);
+      ctx.closePath(); ctx.clip();
+    }
+    function draw() {
+      if (!vals) return;
+      sample();
+      const P = build();
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      if (next && clipA) {
+        ctx.save(); clipTo(clipA); paint(style, P); ctx.restore();
+        ctx.save(); clipTo(clipB); paint(next, P); ctx.restore();
+      } else paint(style, P);
+    }
+    function loop(t) {
+      requestAnimationFrame(loop);
+      if (paused || document.hidden) { last = t; return; }
+      if (!fast && t - last < 42) return;
+      const dt = Math.min(64, last ? t - last : 16);
+      z += dt * (fast ? .00036 : .000028);
+      last = t;
+      draw();
+    }
+    return {
+      init() { resize(); addEventListener("resize", debounce(resize, 140)); if (!reduced) requestAnimationFrame(loop); },
+      begin(to) { next = to; fast = true; },
+      split(a, b) { clipA = a; clipB = b; },
+      end(to) { style = to; next = null; clipA = clipB = null; fast = false; draw(); },
+      set(to) { style = to; next = null; clipA = clipB = null; draw(); },
+      pause(v) { paused = v; }
+    };
+  })();
+
+  /* ---------- section-line geometry (shared by the cover and the transition) ---------- */
+  function parts(svg) {
+    return {
+      band: $(".c-band", svg), line: $(".c-line", svg),
+      endA: $(".c-end-a", svg), endB: $(".c-end-b", svg),
+      arA: $(".c-arr-a", svg), arB: $(".c-arr-b", svg)
+    };
+  }
+  function section(p, xt, xb, H, dir, ltr, y1, y2, bw, yEnd) {
+    if (yEnd == null) yEnd = H;
+    const k = Math.hypot(1, TAN);
+    const nx = dir / k, ny = dir * TAN / k;           // normal pointing to the side being revealed
+    const len = Math.hypot(xb - xt, H), ux = (xb - xt) / len, uy = H / len;
+    const at = y => xt + (xb - xt) * (y / H);
+    const xe = at(yEnd);
+    p.band.setAttribute("points", `${r1(xt)},0 ${r1(xt + bw * dir)},0 ${r1(xe + bw * dir)},${r1(yEnd)} ${r1(xe)},${r1(yEnd)}`);
+    setA(p.line, { x1: xt, y1: 0, x2: xe, y2: yEnd });
+    [[p.endA, p.arA, y1], [p.endB, p.arB, y2]].forEach(([end, ar, y]) => {
+      const x = at(y);
+      setA(end, { x1: x - ux * 22, y1: y - uy * 22, x2: x + ux * 22, y2: y + uy * 22 });
+      const L = 30, ex = x + nx * L, ey = y + ny * L;
+      const [ln, hd, tx] = ar.children;
+      setA(ln, { x1: x, y1: y, x2: ex - nx * 4, y2: ey - ny * 4 });
+      const bx = ex - nx * 10, by = ey - ny * 10, px = -ny, py = nx;
+      hd.setAttribute("d", `M${r1(ex)},${r1(ey)} L${r1(bx + px * 4.5)},${r1(by + py * 4.5)} L${r1(bx - px * 4.5)},${r1(by - py * 4.5)} Z`);
+      setA(tx, { x: ex + nx * 13, y: ey + ny * 13 + 4.5 });
+      tx.textContent = ltr;
+    });
+  }
+
+  /* ---------- transition overlay ---------- */
+  const cut = (() => {
+    const svg = $("#cut"), P = parts(svg), label = $(".c-label", svg);
+    let W = 0, H = 0;
+    function size() { W = innerWidth; H = innerHeight; svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.setAttribute("width", W); svg.setAttribute("height", H); }
+    function frame(xt, xb, dir, alpha, ltr, text) {
+      svg.style.opacity = alpha;
+      const topY = (mobile() ? 54 : 64) + 34, botY = H - (mobile() ? 54 : 58) - 40;
+      section(P, xt, xb, H, dir, ltr, topY, botY, 24);
+      const k = Math.hypot(1, TAN), nx = dir / k, ny = dir * TAN / k;
+      const mx = (xt + xb) / 2, my = H / 2;
+      label.setAttribute("transform", `translate(${r1(mx - nx * 20)},${r1(my - ny * 20)}) rotate(${ANGLE_DEG - 90})`);
+      label.textContent = text;
+    }
+    return { size, frame, hide() { svg.style.opacity = 0; }, get W() { return W; }, get H() { return H; } };
+  })();
+
+  /* ---------- cover: draggable cross-section ---------- */
+  const cover = (() => {
+    const box = $("#xsec");
+    if (!box) return { layout() {}, intro() {} };
+    const eng = $(".xsec-eng", box), field = $(".xsec-field", box), svg = $(".xsec-svg", box), handle = $("#xsec-handle"), P = parts(svg);
+    const copy = $(".cover-copy");
+    let split = .56, lo = .3, hi = .7, W = 0, H = 0, dragging = false, touched = false;
+    function layout() {
+      W = box.clientWidth; H = box.clientHeight;
+      if (!W || !H) return;
+      const half = H / 2 * TAN;
+      const fLeft = field.offsetLeft, fW = field.offsetWidth, eRight = eng.offsetLeft + eng.offsetWidth;
+      lo = (fLeft + half + 6) / W; hi = (eRight - half - 6) / W;
+      if (hi < lo) { lo = hi = .5; }
+      split = clamp(split, lo, hi);
+      const isM = mobile();
+      const ccTop = copy ? copy.getBoundingClientRect().top - box.getBoundingClientRect().top : H;
+      const hy = isM ? clamp(ccTop - 56, H * .26, H / 2) : H / 2;
+      const Xm = split * W, xt = Xm + half, xb = Xm - half;
+      field.style.clipPath = `polygon(${r1(xt - fLeft)}px 0, ${fW + 2}px 0, ${fW + 2}px ${H}px, ${r1(xb - fLeft)}px ${H}px)`;
+      svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+      const y1 = isM ? Math.max(110, hy - 140) : H * .3;
+      const y2 = isM ? Math.max(y1 + 56, hy - 64) : H * .6;
+      const yEnd = isM ? Math.max(hy + 36, ccTop - 18) : H;
+      section(P, xt, xb, H, 1, "A", y1, y2, 16, yEnd);
+      handle.style.left = `${r1(Xm + (H / 2 - hy) * TAN)}px`;
+      handle.style.top = `${r1(hy)}px`;
+      const v = Math.round(split * 100);
+      handle.setAttribute("aria-valuemin", Math.round(lo * 100));
+      handle.setAttribute("aria-valuemax", Math.round(hi * 100));
+      handle.setAttribute("aria-valuenow", v);
+      handle.setAttribute("aria-valuetext", `${v}% engineering, ${100 - v}% outdoors`);
+    }
+    function setSplit(v) { split = clamp(v, lo, hi); layout(); }
+    handle.addEventListener("pointerdown", e => {
+      e.preventDefault(); e.stopPropagation();
+      dragging = touched = true; box.classList.add("dragging");
+      try { handle.setPointerCapture(e.pointerId); } catch (_) {}
+    });
+    handle.addEventListener("pointermove", e => {
+      if (!dragging) return;
+      const r = box.getBoundingClientRect();
+      setSplit((e.clientX - r.left + (e.clientY - r.top - H / 2) * TAN) / W);
+    });
+    const stop = () => { dragging = false; box.classList.remove("dragging"); };
+    handle.addEventListener("pointerup", stop);
+    handle.addEventListener("pointercancel", stop);
+    handle.addEventListener("touchstart", e => e.stopPropagation(), { passive: true });
+    handle.addEventListener("keydown", e => {
+      const step = e.shiftKey ? .1 : .03;
+      let used = true;
+      if (e.key === "ArrowLeft" || e.key === "ArrowDown") setSplit(split - step);
+      else if (e.key === "ArrowRight" || e.key === "ArrowUp") setSplit(split + step);
+      else if (e.key === "PageDown") setSplit(split - .1);
+      else if (e.key === "PageUp") setSplit(split + .1);
+      else if (e.key === "Home") setSplit(lo);
+      else if (e.key === "End") setSplit(hi);
+      else used = false;
+      if (used) { touched = true; e.preventDefault(); e.stopPropagation(); }
+    });
+    function intro() {
+      if (reduced) return;
+      layout();
+      const to = clamp(mobile() ? .5 : .56, lo, hi), from = clamp(to + .12, lo, hi), D = 1600, t0 = performance.now() + 450;
+      split = from; layout();
+      const tick = now => {
+        if (touched) return;
+        const p = clamp((now - t0) / D, 0, 1);
+        split = lerp(from, to, easeIO3(p)); layout();
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }
+    return { layout, intro, get dragging() { return dragging; } };
+  })();
+
+  /* ---------- chrome: rail, counter, title block ---------- */
+  const rail = $("#rail"), count = $("#count"), live = $("#live");
+  const tb = {}; $$("[data-tb]").forEach(el => { tb[el.dataset.tb] = el; });
+  sheets.forEach((s, i) => {
+    const li = document.createElement("li");
+    const b = document.createElement("button");
+    b.type = "button"; b.dataset.go = i; b.dataset.domain = s.dataset.domain;
+    b.setAttribute("aria-label", `Sheet ${pad(i)}: ${s.dataset.title}`);
+    const tick = document.createElement("span"); tick.className = "tick";
+    const rl = document.createElement("span"); rl.className = "rl"; rl.textContent = `${pad(i)} ${s.dataset.title}`;
+    b.append(tick, rl); li.append(b); rail.append(li);
+  });
+  const railBtns = $$("button", rail);
+
+  const GLYPHS = "ABCDEFGHJKLMNPRSTUVWXYZ0123456789";
+  function scramble(el, text, instant) {
+    if (!el) return;
+    cancelAnimationFrame(el._raf);
+    if (instant || reduced) { el.textContent = text; return; }
+    const t0 = performance.now(), D = 620;
+    const tickF = now => {
+      const p = Math.min(1, (now - t0) / D);
+      let out = "";
+      for (let i = 0; i < text.length; i++) {
+        const ch = text[i];
+        const lockAt = .25 + (i / Math.max(1, text.length)) * .7;
+        out += (p >= lockAt || ch === " " || ch === "·" || ch === "/") ? ch : GLYPHS[(Math.random() * GLYPHS.length) | 0];
+      }
+      el.textContent = out;
+      if (p < 1) el._raf = requestAnimationFrame(tickF);
+    };
+    el._raf = requestAnimationFrame(tickF);
+  }
+
+  const prevBtn = $("#prev"), nextBtn = $("#next");
+  function chrome(i, instant) {
+    const d = sheets[i].dataset;
+    document.body.dataset.domain = d.domain;
+    count.innerHTML = `<b>${pad(i)}</b> / ${pad(LAST)}`;
+    railBtns.forEach((b, j) => b.setAttribute("aria-current", j === i ? "true" : "false"));
+    scramble(tb.sheet, `${pad(i)} / ${pad(LAST)}`, instant);
+    scramble(tb.title, d.title, instant);
+    scramble(tb.domain, DOMAIN[d.domain], instant);
+    scramble(tb.loc, d.loc, instant);
+    scramble(tb.date, d.date, instant);
+    scramble(tb.scale, d.scale, instant);
+    prevBtn.disabled = i === 0; nextBtn.disabled = i === LAST;
+    if (!instant) live.textContent = `Sheet ${i} of ${LAST}: ${d.title}`;
+    try { history.replaceState(null, "", `#s${pad(i)}`); } catch (_) {}
+  }
+
+  /* ---------- media in sheets ---------- */
+  function enterMedia(s) {
+    $$("video[data-auto]", s).forEach(v => {
+      v.preload = "auto"; v.muted = true;
+      const pr = v.play(); if (pr && pr.catch) pr.catch(() => {});
+    });
+  }
+  function leaveMedia(s) { $$("video", s).forEach(v => { try { v.pause(); } catch (_) {} }); }
+  const preloaded = new Set();
+  function preloadSheet(s) {
+    if (!s || preloaded.has(s)) return;
+    preloaded.add(s);
+    $$("img", s).forEach(im => { const src = im.getAttribute("src"); if (src) { const x = new Image(); x.decoding = "async"; x.src = src; } });
+  }
+  function preloadAround(i) { [i + 1, i - 1, i + 2].forEach(j => preloadSheet(sheets[j])); }
+
+  /* ---------- navigation ---------- */
+  const stage = $("#stage");
+  function scroller(s) { return mobile() ? $(".sheet-inner", s) : $(".sheet-text", s); }
+
+  function go(to, opts = {}) {
+    to = clamp(to | 0, 0, LAST);
+    if (to === cur || busy) return;
+    const dir = to > cur ? 1 : -1;
+    const from = sheets[cur], next = sheets[to];
+    const fromDomain = from.dataset.domain, toDomain = next.dataset.domain;
+    busy = true; stage.classList.add("busy");
+    preloadSheet(next);
+    chrome(to);
+    const inner = $(".sheet-inner", next);
+    if (inner) inner.scrollTop = 0;
+    const st = $(".sheet-text", next); if (st) st.scrollTop = 0;
+
+    if (reduced || opts.instant) {
+      from.classList.remove("is-active");
+      next.classList.add("is-active");
+      leaveMedia(from); enterMedia(next);
+      terrain.set(toDomain);
+      cur = to; busy = false; stage.classList.remove("busy");
+      if (next.id === "s00") cover.layout();
+      preloadAround(to);
+      return;
+    }
+
+    next.classList.add("is-entering", "pre");
+    from.classList.add("is-leaving");
+    from.classList.remove("is-active");
+    if (next.id === "s00") cover.layout();
+    enterMedia(next);
+    terrain.begin(toDomain);
+    const fi = $(".sheet-inner", from), ni = $(".sheet-inner", next);
+    const W = cut.W || innerWidth, H = cut.H || innerHeight;
+    const m = H / 2 * TAN + 90;
+    const D = mobile() ? 900 : 1150;
+    const ltr = letter(to);
+    const sp = "   ";
+    const text = `SECTION ${ltr}–${ltr}${sp}·${sp}SHEET ${pad(to)}${sp}·${sp}${next.dataset.title.toUpperCase()}`;
+    const t0 = performance.now();
+    let revealed = false;
+    const frame = now => {
+      const p = Math.min(1, (now - t0) / D);
+      const e = easeIO(p);
+      const xc = dir > 0 ? lerp(W + m, -m, e) : lerp(-m, W + m, e);
+      const xt = xc + H / 2 * TAN, xb = xc - H / 2 * TAN;
+      const swept = dir > 0 ? [[xt, 0], [W + 4, 0], [W + 4, H], [xb, H]] : [[-4, 0], [xt, 0], [xb, H], [-4, H]];
+      const rest = dir > 0 ? [[-4, 0], [xt, 0], [xb, H], [-4, H]] : [[xt, 0], [W + 4, 0], [W + 4, H], [xb, H]];
+      const poly = pts => `polygon(${pts.map(q => `${r1(q[0])}px ${r1(q[1])}px`).join(",")})`;
+      next.style.clipPath = poly(swept);
+      from.style.clipPath = poly(rest);
+      if (ni) ni.style.transform = `translate3d(${r1(dir * 64 * (1 - e))}px,0,0)`;
+      if (fi) fi.style.transform = `translate3d(${r1(-dir * 44 * e)}px,0,0)`;
+      terrain.split(rest, swept);
+      const alpha = p < .06 ? p / .06 : p > .9 ? Math.max(0, (1 - p) / .1) : 1;
+      cut.frame(xt, xb, dir, alpha, ltr, text);
+      if (!revealed && p > .26) { revealed = true; next.classList.remove("pre"); }
+      if (p < 1) requestAnimationFrame(frame);
+      else finish();
+    };
+    function finish() {
+      from.classList.remove("is-leaving");
+      from.style.clipPath = ""; if (fi) fi.style.transform = "";
+      next.classList.remove("is-entering", "pre");
+      next.classList.add("is-active");
+      next.style.clipPath = ""; if (ni) ni.style.transform = "";
+      cut.hide();
+      terrain.end(toDomain);
+      leaveMedia(from);
+      cur = to; busy = false; stage.classList.remove("busy");
+      preloadAround(to);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function anyOpen() { return !!document.querySelector("dialog[open]"); }
+
+  function canScroll(el, dy) {
+    if (!el) return false;
+    if (el.scrollHeight <= el.clientHeight + 2) return false;
+    return dy > 0 ? el.scrollTop + el.clientHeight < el.scrollHeight - 2 : el.scrollTop > 2;
+  }
+  function scrollableFrom(target, dy) {
+    let el = target instanceof Element ? target : null;
+    while (el && !el.classList.contains("sheet")) {
+      const oy = getComputedStyle(el).overflowY;
+      if ((oy === "auto" || oy === "scroll") && canScroll(el, dy)) return true;
+      el = el.parentElement;
+    }
+    return false;
+  }
+
+  document.addEventListener("keydown", e => {
+    if (anyOpen() || e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey) return;
+    const t = e.target;
+    if (t && t.closest && t.closest("input, textarea, select, [contenteditable], .xsec-handle")) return;
+    const onControl = t && t.closest && t.closest("button, a");
+    const k = e.key;
+    if (k === "ArrowRight" || k === "PageDown") { e.preventDefault(); go(cur + 1); }
+    else if (k === "ArrowLeft" || k === "PageUp") { e.preventDefault(); go(cur - 1); }
+    else if (k === " " && !onControl) { e.preventDefault(); go(cur + (e.shiftKey ? -1 : 1)); }
+    else if (k === "ArrowDown") { if (!canScroll(scroller(sheets[cur]), 1)) { e.preventDefault(); go(cur + 1); } }
+    else if (k === "ArrowUp") { if (!canScroll(scroller(sheets[cur]), -1)) { e.preventDefault(); go(cur - 1); } }
+    else if (k === "Home") { e.preventDefault(); go(0); }
+    else if (k === "End") { e.preventDefault(); go(LAST); }
+  });
+
+  let wheelAcc = 0, wheelLock = 0, wheelLast = 0;
+  addEventListener("wheel", e => {
+    if (anyOpen()) return;
+    const dy = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+    if (scrollableFrom(e.target, dy)) return;
+    e.preventDefault();
+    const now = performance.now();
+    if (now < wheelLock) { wheelLock = Math.max(wheelLock, now + 140); return; }
+    if (now - wheelLast > 220) wheelAcc = 0;
+    wheelLast = now;
+    wheelAcc += dy;
+    if (Math.abs(wheelAcc) > 42) {
+      const step = wheelAcc > 0 ? 1 : -1;
+      wheelAcc = 0;
+      if (!busy) { go(cur + step); wheelLock = now + (mobile() ? 900 : 1150) + 260; }
+    }
+  }, { passive: false });
+
+  let tx = 0, ty = 0, tracking = false;
+  stage.addEventListener("touchstart", e => {
+    if (e.touches.length !== 1 || cover.dragging) { tracking = false; return; }
+    tracking = true; tx = e.touches[0].clientX; ty = e.touches[0].clientY;
+  }, { passive: true });
+  stage.addEventListener("touchend", e => {
+    if (!tracking || cover.dragging) { tracking = false; return; }
+    tracking = false;
+    const t = e.changedTouches[0], dx = t.clientX - tx, dy = t.clientY - ty;
+    if (Math.abs(dx) > 56 && Math.abs(dx) > Math.abs(dy) * 1.4) go(cur + (dx < 0 ? 1 : -1));
+    else if (Math.abs(dy) > 70 && Math.abs(dy) > Math.abs(dx) * 1.4 && !canScroll(scroller(sheets[cur]), dy < 0 ? 1 : -1) && !mobile()) go(cur + (dy < 0 ? 1 : -1));
+  }, { passive: true });
+
+  prevBtn.addEventListener("click", () => go(cur - 1));
+  nextBtn.addEventListener("click", () => go(cur + 1));
+
+  /* ---------- dialogs ---------- */
+  function openDlg(d) {
+    if (d.open) return;
+    terrain.pause(true);
+    d.showModal();
+    requestAnimationFrame(() => requestAnimationFrame(() => d.classList.add("in")));
+  }
+  function closeDlg(d, after) {
+    if (!d.open) { if (after) after(); return; }
+    d.classList.remove("in");
+    setTimeout(() => {
+      d.close();
+      if (d === lb) lbMedia.replaceChildren();
+      if (!anyOpen()) terrain.pause(false);
+      if (after) after();
+    }, reduced ? 0 : 380);
+  }
+  $$("dialog").forEach(d => {
+    d.addEventListener("cancel", e => { e.preventDefault(); closeDlg(d); });
+    d.addEventListener("click", e => {
+      if (e.target.closest("[data-close]")) { closeDlg(d); return; }
+      if (e.target === d && d.id === "wu") {
+        const r = d.getBoundingClientRect();
+        if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) closeDlg(d);
+      }
+    });
+  });
+
+  // index
+  const ix = $("#ix"), ixGrid = $("#ix-grid");
+  sheets.forEach((s, i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "ix-card"; b.dataset.go = i; b.dataset.domain = s.dataset.domain;
+    const th = document.createElement("span"); th.className = "ix-thumb";
+    const im = document.createElement("img"); im.src = s.dataset.thumb; im.alt = ""; im.loading = "lazy"; im.decoding = "async";
+    th.append(im);
+    const meta = document.createElement("span"); meta.className = "ix-meta";
+    const n = document.createElement("span"); n.className = "ix-n"; n.textContent = pad(i);
+    const t = document.createElement("span"); t.className = "ix-t"; t.textContent = s.dataset.title;
+    meta.append(n, t);
+    const dm = document.createElement("span"); dm.className = "ix-d"; dm.textContent = DOMAIN[s.dataset.domain];
+    b.append(th, meta, dm);
+    ixGrid.append(b);
+  });
+  function openIndex() {
+    $$(".ix-card", ixGrid).forEach((c, i) => c.setAttribute("aria-current", i === cur ? "true" : "false"));
+    openDlg(ix);
+  }
+
+  // write-ups
+  const wu = $("#wu"), wuBody = $("#wu-body"), wuNo = $("#wu-no"), wuTitle = $("#wu-title");
+  function openWu(id) {
+    const tpl = document.getElementById(`wu-${id}`);
+    if (!tpl) return;
+    const i = parseInt(id, 10);
+    wuNo.textContent = `Sheet ${pad(i)} · Section ${letter(i)}–${letter(i)}`;
+    wuTitle.textContent = tpl.dataset.title || sheets[i].dataset.title;
+    wuBody.replaceChildren(tpl.content.cloneNode(true));
+    wu.scrollTop = 0;
+    openDlg(wu);
+  }
+
+  // lightbox
+  const lb = $("#lb"), lbMedia = $("#lb-media"), lbCap = $("#lb-cap"), lbMeta = $("#lb-meta"), lbNum = $("#lb-num");
+  const lbPrev = $("#lb-prev"), lbNext = $("#lb-next");
+  let lbList = [], lbI = 0;
+  function openLb(btn) {
+    const scope = btn.closest(".contact") || btn.closest(".sheet") || document;
+    lbList = $$(".fig-open", scope);
+    lbI = Math.max(0, lbList.indexOf(btn));
+    showLb();
+    openDlg(lb);
+  }
+  function showLb() {
+    const b = lbList[lbI];
+    if (!b) return;
+    lbMedia.replaceChildren();
+    if (b.dataset.kind === "video") {
+      const v = document.createElement("video");
+      v.src = b.dataset.src; v.poster = b.dataset.poster || ""; v.controls = true; v.loop = true; v.playsInline = true;
+      lbMedia.append(v);
+      const pr = v.play();
+      if (pr && pr.catch) pr.catch(() => { v.muted = true; v.play().catch(() => {}); });
+    } else {
+      const im = new Image();
+      im.decoding = "async"; im.src = b.dataset.src;
+      const src = b.querySelector("img"); im.alt = src ? src.alt : "";
+      lbMedia.append(im);
+    }
+    lbCap.textContent = b.dataset.cap || "";
+    lbMeta.textContent = b.dataset.meta || "";
+    lbNum.textContent = `${pad(lbI + 1)} / ${pad(lbList.length)}`;
+    const multi = lbList.length > 1;
+    lbPrev.hidden = !multi; lbNext.hidden = !multi;
+  }
+  lbPrev.addEventListener("click", () => { lbI = (lbI - 1 + lbList.length) % lbList.length; showLb(); });
+  lbNext.addEventListener("click", () => { lbI = (lbI + 1) % lbList.length; showLb(); });
+  lb.addEventListener("keydown", e => {
+    if (e.key === "ArrowLeft") { e.preventDefault(); lbPrev.click(); }
+    else if (e.key === "ArrowRight") { e.preventDefault(); lbNext.click(); }
+  });
+  let lbX = 0;
+  lb.addEventListener("touchstart", e => { lbX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener("touchend", e => {
+    const dx = e.changedTouches[0].clientX - lbX;
+    if (Math.abs(dx) > 50 && lbList.length > 1) (dx < 0 ? lbNext : lbPrev).click();
+  }, { passive: true });
+
+  /* ---------- delegated clicks ---------- */
+  document.addEventListener("click", e => {
+    const t = e.target;
+    const goEl = t.closest("[data-go]");
+    if (goEl) {
+      e.preventDefault();
+      const to = parseInt(goEl.dataset.go, 10);
+      if (ix.open) closeDlg(ix, () => go(to)); else go(to);
+      return;
+    }
+    if (t.closest("[data-index]")) { e.preventDefault(); openIndex(); return; }
+    const w = t.closest("[data-wu]");
+    if (w) { e.preventDefault(); openWu(w.dataset.wu); return; }
+    const proxy = t.closest("[data-proxy]");
+    if (proxy) {
+      const [sid, k] = proxy.dataset.proxy.split("-");
+      const target = $$(".fig-open", document.getElementById(sid))[+k];
+      if (target) openLb(target);
+      return;
+    }
+    const f = t.closest(".fig-open");
+    if (f && !t.closest("dialog")) { e.preventDefault(); openLb(f); }
+  });
+
+  /* ---------- boot ---------- */
+  $$(".sheet").forEach(s => $$(".rv", s).forEach((el, i) => el.style.setProperty("--i", i)));
+  cut.size();
+  terrain.init();
+  const m = /^#s(\d{2})$/.exec(location.hash || "");
+  if (m) {
+    const i = parseInt(m[1], 10);
+    if (i > 0 && i <= LAST) { sheets[0].classList.remove("is-active"); sheets[i].classList.add("is-active"); cur = i; }
+  }
+  terrain.set(sheets[cur].dataset.domain);
+  chrome(cur, true);
+  enterMedia(sheets[cur]);
+  cover.layout();
+  if (cur === 0) cover.intro();
+  addEventListener("resize", debounce(() => { cut.size(); cover.layout(); }, 100));
+  addEventListener("hashchange", () => {
+    const mm = /^#s(\d{2})$/.exec(location.hash || "");
+    if (mm) go(parseInt(mm[1], 10));
+  });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => cover.layout());
+  setTimeout(() => preloadAround(cur), 900);
+  setTimeout(() => sheets.forEach(preloadSheet), 3200);
+})();
+</script>
+</body>
+</html>
